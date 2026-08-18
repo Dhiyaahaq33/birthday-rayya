@@ -197,7 +197,16 @@ function processMoodSelection(emojiSymbol, labelString) {
         function commitJournalEntry() {
             const currentContent = document.getElementById('journal-editor').value;
             localStorage.setItem('birthday_stored_journal', currentContent);
-            alert("Harapan ulang tahunmu sudah aman tersimpan.");
+            alert("Harapan ulang tahunmu sudah aman tersimpan di browser ini.");
+        }
+
+        function viewJournalEntry() {
+            const savedContent = localStorage.getItem('birthday_stored_journal');
+            if (savedContent) {
+                alert("Journal tersimpan:\n\n" + savedContent);
+            } else {
+                alert("Belum ada journal yang tersimpan di browser ini.");
+            }
         }
 
         /* --- STAGE 7: INTERACTIVE PROGRESS TRACKER --- */
