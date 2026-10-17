@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Khusus - Rayya</title>
+    <title>Ruang Rahasia & Surat Cinta - Rayya 🎂💌</title>
 
     <!-- Google Fonts Integration -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=2.2">
+    <link rel="stylesheet" href="style.css?v=2.3">
 
     <style>
         .page-container {
@@ -20,8 +20,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px 40px;
-            max-width: 900px;
+            padding: 90px 20px 60px;
+            max-width: 920px;
             margin: 0 auto;
         }
 
@@ -112,34 +112,220 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 20px;
+            padding: 8px 22px;
             background: rgba(255, 143, 171, 0.15);
             color: var(--primary);
             border: 1px solid var(--primary);
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
         }
 
-        .placeholder-box {
-            border: 2px dashed var(--primary);
+        /* Email Dispatch Card Form */
+        .email-form-box {
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 2.8rem 1.8rem;
-            margin: 2.2rem 0 1.5rem;
-            background: rgba(255, 255, 255, 0.25);
+            padding: 2rem 1.8rem;
+            margin: 2rem 0;
+            text-align: left;
         }
 
-        [data-theme="dark"] .placeholder-box {
-            background: rgba(30, 41, 59, 0.35);
+        [data-theme="dark"] .email-form-box {
+            background: rgba(30, 41, 59, 0.4);
         }
 
-        .action-row {
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control-input, .form-control-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            outline: none;
+            transition: all 0.25s ease;
+            box-sizing: border-box;
+        }
+
+        [data-theme="dark"] .form-control-input, 
+        [data-theme="dark"] .form-control-textarea {
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .form-control-input:focus, .form-control-textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.3);
+        }
+
+        .form-control-textarea {
+            min-height: 180px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        /* Dispatch Action Buttons */
+        .dispatch-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-dispatch {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff6b8b 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 143, 171, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-dispatch:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(255, 143, 171, 0.5);
+        }
+
+        .btn-gmail {
+            background: #ea4335;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(234, 67, 53, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-gmail:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.4);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Status Banner */
+        .status-alert {
+            display: none;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 1.2rem;
+            animation: fadeInStatus 0.3s ease;
+        }
+
+        @keyframes fadeInStatus {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-alert.success {
+            display: block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #10b981;
+        }
+
+        .status-alert.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .status-alert.loading {
+            display: block;
+            background: rgba(255, 143, 171, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Romantic Love Letter Box */
+        .love-letter-parchment {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 2.2rem;
+            margin: 3rem 0 1.5rem;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 8px 30px var(--glass-shadow);
+        }
+
+        [data-theme="dark"] .love-letter-parchment {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .love-letter-parchment h2 {
+            font-family: var(--font-quotes);
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .love-letter-parchment p {
+            font-size: 1.12rem;
+            line-height: 2;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .action-footer {
             display: flex;
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .btn-sec {
@@ -180,14 +366,14 @@
     </header>
 
     <main class="page-container">
-        <!-- 1. LOCK SCREEN (Jika Belum Masukkan PIN) -->
+        <!-- 1. LOCK SCREEN (PIN 130806) -->
         <div id="lock-screen-container">
             <div class="glass-card">
                 <div class="lock-icon-circle" id="lock-icon-circle">
                     <i class="fas fa-lock" id="lock-icon"></i>
                 </div>
-                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Ruang Rahasia Rayya</h2>
-                <p style="font-size: 1rem; margin-bottom: 1rem;">Halaman ini terproteksi. Masukkan 6 digit PIN untuk membukanya:</p>
+                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Pintu Rahasia Cinta</h2>
+                <p style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-light);">Masukkan 6 digit kode keamanan untuk membuka sistem pengirim surat cinta:</p>
 
                 <div class="pin-box">
                     <input type="password" id="pin-input" maxlength="6" inputmode="numeric" placeholder="••••••" autocomplete="off" onkeyup="handlePinEnter(event)" autofocus>
@@ -196,8 +382,8 @@
                 <div id="pin-feedback"></div>
 
                 <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                    <button class="btn-prime" onclick="verifyEnteredPin()" style="width: 100%; max-width: 250px;">
-                        <i class="fas fa-key"></i> Buka Halaman
+                    <button class="btn-prime" onclick="verifyEnteredPin()" style="width: 100%; max-width: 260px;">
+                        <i class="fas fa-key"></i> Buka Pintu Rahasia
                     </button>
                     <a href="index.html" class="btn-sec" style="margin-top: 8px;">
                         <i class="fas fa-arrow-left"></i> Kembali ke Beranda
@@ -206,27 +392,85 @@
             </div>
         </div>
 
-        <!-- 2. UNLOCKED CONTENT (Tampil Setelah PIN 130806 Benar) -->
+        <!-- 2. UNLOCKED CONTENT (Love Email Dispatcher & Secret Letter) -->
         <div id="unlocked-content">
             <div class="glass-card">
                 <div class="special-badge">
-                    <i class="fas fa-lock-open"></i> Private Room • 130806 Verified
+                    <i class="fas fa-heart"></i> Ruang Rahasia Yahya & Rayya • 130806 Verified
                 </div>
 
-                <h1 style="color: var(--primary); margin-bottom: 0.5rem;">Halaman Khusus Rayya</h1>
-                <p class="quote-text" style="margin: 1.5rem 0;">"Tempat spesial yang sekarang sudah terbuka untukmu."</p>
+                <h1 style="color: var(--primary); margin-bottom: 0.5rem;">Kirim Notifikasi Spesial ke Email Rayya 💌</h1>
+                <p class="quote-text" style="margin: 1rem 0 2rem;">"Cukup tulis emailnya, dan biarkan keajaiban cinta mengantarkan kejutannya."</p>
 
-                <div class="placeholder-box">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">✨ 💌 🎂</div>
-                    <h3 style="margin-bottom: 1rem; color: var(--text);">Halaman Siap Diisi!</h3>
-                    <p style="max-width: 620px; margin: 0 auto; line-height: 1.8; color: var(--text-light);">
-                        Halaman ini sudah aktif dengan URL terpisah (<code style="background: rgba(255,143,171,0.2); padding: 2px 6px; border-radius: 6px;">special.html</code>). 
-                        Silakan beri tahu apa saja isi atau kejutan yang ingin kamu letakkan di sini 
-                        (misalnya: surat ucapan panjang, galeri foto kenangan, pesan tersembunyi, timeline, atau lagu khusus).
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-light); line-height: 1.8;">
+                    Tuliskan alamat email Rayya di bawah ini. Ketika kamu menekan tombol kirim, sistem akan mengirimkan notifikasi surat cinta manis berisi link website ulang tahun ini agar Rayya bisa langsung notice, membuka, dan merasakan kebahagiaan hari ini!
+                </p>
+
+                <!-- EMAIL DISPATCH FORM -->
+                <div class="email-form-box">
+                    <label class="form-label" for="recipient-email"><i class="fas fa-envelope" style="color: var(--primary);"></i> Alamat Email Rayya (Penerima):</label>
+                    <input type="email" id="recipient-email" class="form-control-input" placeholder="Masukkan email Rayya (contoh: rayyachildora@gmail.com)" required>
+
+                    <label class="form-label" for="sender-name"><i class="fas fa-user" style="color: var(--primary);"></i> Dari (Pengirim):</label>
+                    <input type="text" id="sender-name" class="form-control-input" value="Muhammad Yahya DH." readonly>
+
+                    <label class="form-label" for="email-subject"><i class="fas fa-heading" style="color: var(--primary);"></i> Subjek Email:</label>
+                    <input type="text" id="email-subject" class="form-control-input" value="🎂💌 Ada Kejutan Surat Rahasia di Hari Ulang Tahunmu, Rayya... Buka Sekarang!">
+
+                    <label class="form-label" for="email-body"><i class="fas fa-pen-nib" style="color: var(--primary);"></i> Isi Pesan Notifikasi (Bisa kamu edit langsung):</label>
+                    <textarea id="email-body" class="form-control-textarea">Hai Rayya, cantiknya aku... 🤍
+
+Selamat ulang tahun yang paling istimewa untuk manusia paling berharga di hidupku.
+
+Hari ini, aku sudah menyiapkan satu ruang kecil penuh kejutan dan cinta yang sengaja kubuat khusus untuk menemani hari ulang tahunmu. Di dalamnya ada semua doa tulus, suara penenang, dan rasa syukurku memilikimu.
+
+Silakan buka kejutannya di sini ya, bidadariku:
+👉 https://dhiyaahaq33.github.io/birthday-rayya/
+
+(Psst... ada pintu rahasia berikon rumah di kanan atas dengan PIN: 130806 yang menunggu untuk kamu buka!)
+
+Aku mencintaimu lebih dari kata-kata yang bisa kuungkapkan. Selamat menikmati hari spesialmu ya, cintaku! 🎂🤍
+
+Dengan segenap cintaku,
+Muhammad Yahya DH.</textarea>
+
+                    <div class="dispatch-buttons">
+                        <button type="button" class="btn-dispatch" id="btn-send-email" onclick="sendEmailNotification()">
+                            <i class="fas fa-paper-plane"></i> Kirim Notifikasi ke Email Rayya
+                        </button>
+                        <a href="javascript:void(0)" class="btn-gmail" onclick="openDirectGmail()">
+                            <i class="fab fa-google"></i> Buka Langsung di Gmail
+                        </a>
+                        <a href="javascript:void(0)" class="btn-wa" onclick="openDirectWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Kirim Notifikasi via WA
+                        </a>
+                    </div>
+
+                    <div id="status-box" class="status-alert"></div>
+                </div>
+
+                <!-- DIGITAL LOVE LETTER SECTION -->
+                <div class="love-letter-parchment">
+                    <h2>"Untuk Rayya, Pemilik Senyum Terindah di Duniaku"</h2>
+                    <p>
+                        Hai, Rayya. Selamat ulang tahun ya, sayangku.
+                    </p>
+                    <p>
+                        Kalau ada satu hal yang paling membuatku bersyukur di dunia yang luas dan seringkali bising ini, itu adalah kehadiranmu. Terima kasih sudah lahir ke bumi. Terima kasih sudah memilih untuk terus melangkah, bertumbuh menjadi sosok perempuan yang begitu luar biasa, kuat, hangat, dan selalu penuh ketulusan.
+                    </p>
+                    <p>
+                        Mungkin website kecil ini hanyalah rangkaian kode sederhana, tapi di balik setiap barisnya ada doa yang kupanjatkan sungguh-sungguh untukmu: semoga hatimu selalu dilapangkan, senyum manismu tak pernah luntur oleh lelahnya hari, dan apapun impian yang sedang kamu perjuangkan, semoga selalu dimudahkan jalannya.
+                    </p>
+                    <p>
+                        Ingat ya sayang, di setiap langkahmu, di saat kamu merasa lelah ataupun saat kamu merayakan kemenangan kecilmu, aku akan selalu ada di sini — bangga memilikimu, siap mendengarmu, dan selalu mencintaimu dengan cara terbaik yang kubisa.
+                    </p>
+                    <p style="text-align: right; font-style: italic; font-family: var(--font-quotes); font-size: 1.3rem; color: var(--primary); margin-top: 2rem;">
+                        Selamanya mencintaimu,<br>
+                        <strong>Muhammad Yahya DH. 🤍</strong>
                     </p>
                 </div>
 
-                <div class="action-row">
+                <div class="action-footer">
                     <a href="index.html" class="btn-prime" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                         <i class="fas fa-home"></i> Kembali ke Beranda
                     </a>
@@ -241,7 +485,7 @@
     <script>
         const CORRECT_PIN = "130806";
 
-        // Cek status saat halaman dimuat
+        // Cek status PIN saat halaman dimuat
         document.addEventListener("DOMContentLoaded", () => {
             restoreTheme();
             if (sessionStorage.getItem('secret_unlocked') === CORRECT_PIN) {
@@ -273,7 +517,7 @@
             if (val === CORRECT_PIN) {
                 sessionStorage.setItem('secret_unlocked', CORRECT_PIN);
                 feedback.style.color = '#10b981';
-                feedback.innerText = 'PIN Benar! Membuka ruang rahasia... ✨';
+                feedback.innerText = 'PIN Benar! Membuka ruang rahasia cinta... ✨';
 
                 // Animasi gembok terbuka
                 const circle = document.getElementById('lock-icon-circle');
@@ -320,6 +564,92 @@
         function lockPageAgain() {
             sessionStorage.removeItem('secret_unlocked');
             window.location.reload();
+        }
+
+        // --- SISTEM PENGIRIMAN EMAIL OTOMATIS KE RAYYA ---
+        async function sendEmailNotification() {
+            const recipientEmail = document.getElementById('recipient-email').value.trim();
+            const senderName = document.getElementById('sender-name').value.trim();
+            const subject = document.getElementById('email-subject').value.trim();
+            const messageBody = document.getElementById('email-body').value.trim();
+            const statusBox = document.getElementById('status-box');
+            const sendBtn = document.getElementById('btn-send-email');
+
+            if (!recipientEmail || !recipientEmail.includes('@')) {
+                statusBox.className = 'status-alert error';
+                statusBox.innerHTML = '<i class="fas fa-exclamation-circle"></i> Mohon masukkan alamat email Rayya yang valid!';
+                document.getElementById('recipient-email').focus();
+                return;
+            }
+
+            statusBox.className = 'status-alert loading';
+            statusBox.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sedang mengirimkan surat cinta ke email Rayya (' + recipientEmail + ')...';
+            sendBtn.disabled = true;
+
+            try {
+                // Kirim via FormSubmit AJAX endpoint langsung ke recipientEmail
+                const payload = {
+                    _subject: subject,
+                    _replyto: "noreply@birthday-rayya.app",
+                    Pengirim: senderName,
+                    Pesan_Cinta: messageBody,
+                    Link_Website: "https://dhiyaahaq33.github.io/birthday-rayya/",
+                    PIN_Rahasia: "130806",
+                    _template: "table"
+                };
+
+                const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusBox.className = 'status-alert success';
+                    statusBox.innerHTML = '<strong><i class="fas fa-check-circle"></i> Berhasil Terkirim!</strong> Surat cinta dan notifikasi sudah meluncur ke email <b>' + recipientEmail + '</b>. Rayya bisa langsung notice dan membukanya! 💌✨';
+                } else {
+                    // Fallback jika layanan butuh konfirmasi pertama
+                    statusBox.className = 'status-alert success';
+                    statusBox.innerHTML = '<strong><i class="fas fa-check-circle"></i> Permintaan Terkirim!</strong> Notifikasi ke <b>' + recipientEmail + '</b> sedang diproses. Kamu juga bisa menggunakan tombol <b>"Buka Langsung di Gmail"</b> di bawah untuk kirim instan dari akun pribadimu! ✨';
+                }
+            } catch (err) {
+                console.error("Email send error:", err);
+                statusBox.className = 'status-alert success';
+                statusBox.innerHTML = '<strong><i class="fas fa-paper-plane"></i> Notifikasi Siap!</strong> Klik tombol merah <b>"Buka Langsung di Gmail"</b> di bawah untuk mengirimkannya langsung 100% dari akun Gmail-mu ke Rayya!';
+            } finally {
+                sendBtn.disabled = false;
+            }
+        }
+
+        // Buka langsung di Gmail Web dengan draft lengkap siap kirim
+        function openDirectGmail() {
+            const recipientEmail = document.getElementById('recipient-email').value.trim();
+            const subject = document.getElementById('email-subject').value.trim();
+            const messageBody = document.getElementById('email-body').value.trim();
+
+            if (!recipientEmail) {
+                alert('Tolong masukkan email Rayya terlebih dahulu ya!');
+                document.getElementById('recipient-email').focus();
+                return;
+            }
+
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(messageBody)}`;
+            window.open(gmailUrl, '_blank');
+        }
+
+        // Buka langsung di WhatsApp Web/App dengan draft pesan romantis
+        function openDirectWhatsApp() {
+            const subject = document.getElementById('email-subject').value.trim();
+            const messageBody = document.getElementById('email-body').value.trim();
+
+            const waText = `*${subject}*\n\n${messageBody}`;
+            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+            window.open(waUrl, '_blank');
         }
 
         // Theme management
