@@ -187,12 +187,17 @@
             position: fixed;
             top: 20px; right: 20px;
             z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
         }
 
-        .theme-toggle {
+        .theme-toggle, .nav-extra-btn {
             background: var(--surface);
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
@@ -202,10 +207,118 @@
             font-size: 1.2rem;
             color: var(--text);
             box-shadow: 0 4px 12px var(--glass-shadow);
-            transition: transform 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .theme-toggle:hover { transform: rotate(15deg) scale(1.05); }
+        .theme-toggle:hover { transform: rotate(15deg) scale(1.08); }
+        .nav-extra-btn:hover { 
+            color: var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px var(--glass-shadow);
+        }
+
+        /* ==========================================
+           PIN ACCESS MODAL
+        ========================================== */
+        .pin-modal-backdrop {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pin-modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .pin-modal-card {
+            position: relative;
+            max-width: 380px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPopIn {
+            from { transform: scale(0.88); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .pin-modal-close {
+            position: absolute;
+            top: 15px; right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .pin-modal-close:hover { color: var(--primary); }
+
+        .pin-modal-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .pin-input-group {
+            margin: 1.2rem 0 0.4rem;
+        }
+
+        .pin-input-group input {
+            width: 100%;
+            max-width: 220px;
+            text-align: center;
+            font-size: 1.8rem;
+            letter-spacing: 6px;
+            padding: 10px 14px;
+            border-radius: 16px;
+            border: 2px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text);
+            outline: none;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        [data-theme="dark"] .pin-input-group input {
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .pin-input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 143, 171, 0.25);
+        }
+
+        .pin-input-group input.shake {
+            animation: pinShakeAnim 0.4s ease;
+            border-color: #ef4444;
+        }
+
+        @keyframes pinShakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .pin-error-text {
+            min-height: 22px;
+            font-size: 0.88rem;
+            color: #ef4444;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
 
         /* FLOATING SIDE MENU */
         .floating-nav {

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Khusus - Rayya</title>
+
+    <!-- Google Fonts Integration -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .special-page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .special-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255, 143, 171, 0.15);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--glass-shadow);
+            margin-top: 2rem;
+        }
+
+        .back-home-btn:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--glass-shadow);
+        }
+
+        .placeholder-box {
+            border: 2px dashed var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            margin: 2rem 0 1rem;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .placeholder-box {
+            background: rgba(30, 41, 59, 0.25);
+        }
+    </style>
+
+    <script>
+        // Keamanan: Cek apakah user sudah memasukkan PIN 130806
+        if (sessionStorage.getItem('secret_unlocked') !== '130806') {
+            alert('Akses terbatas! Silakan masukkan PIN terlebih dahulu melalui halaman utama.');
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+
+    <!-- MAIN ACCESS CONTROLS -->
+    <header>
+        <button class="theme-toggle" onclick="toggleThemeSystem()" title="Ubah Tema">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <a href="index.html" class="nav-extra-btn" title="Kembali ke Beranda" style="text-decoration: none;">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </header>
+
+    <main class="special-page-wrapper">
+        <div class="glass-card">
+            <div class="special-badge">
+                <i class="fas fa-lock-open"></i> Private Room • 130806 Verified
+            </div>
+
+            <h1 style="color: var(--primary);">Halaman Khusus Rayya</h1>
+            <p class="quote-text">"Ruang rahasia ini sudah berhasil terbuka."</p>
+
+            <div class="placeholder-box">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">✨ 💌 ✨</div>
+                <h3 style="margin-bottom: 0.8rem; color: var(--text);">Halaman Siap Diisi!</h3>
+                <p style="max-width: 600px; margin: 0 auto; color: var(--text-light);">
+                    Halaman ini sudah aktif dan terproteksi PIN <strong>130806</strong>. 
+                    Tinggal kamu tentukan isi dan konten apa saja yang ingin ditampilkan di sini 
+                    (misalnya pesan khusus, galeri foto, memori perjalanan, atau surprise lainnya).
+                </p>
+            </div>
+
+            <div>
+                <a href="index.html" class="back-home-btn">
+                    <i class="fas fa-home"></i> Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // System Theme Handler
+        function toggleThemeSystem() {
+            const htmlNode = document.documentElement;
+            const currentTheme = htmlNode.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlNode.setAttribute('data-theme', targetTheme);
+            localStorage.setItem('birthday_sys_theme', targetTheme);
+            
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.className = targetTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Apply theme from storage on load
+        document.addEventListener("DOMContentLoaded", () => {
+            const cachedTheme = localStorage.getItem('birthday_sys_theme');
+            if (cachedTheme) {
+                document.documentElement.setAttribute('data-theme', cachedTheme);
+                const themeIcon = document.getElementById('theme-icon');
+                if (themeIcon) {
+                    themeIcon.className = cachedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

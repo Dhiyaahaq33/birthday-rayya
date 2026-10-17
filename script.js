@@ -319,3 +319,68 @@ function processMoodSelection(emojiSymbol, labelString) {
                 evaluateChallengeProgress();
             }
         }
+
+        /* --- STAGE 10: PIN SECURITY & SPECIAL PAGE NAVIGATION --- */
+        const SECRET_PIN_CODE = "130806";
+        const SPECIAL_PAGE_URL = "special.html";
+
+        function openPinModal() {
+            const modal = document.getElementById('pin-modal');
+            const input = document.getElementById('pin-input');
+            const errorMsg = document.getElementById('pin-error-msg');
+            
+            if (!modal) return;
+            errorMsg.innerText = '';
+            errorMsg.style.color = '#ef4444';
+            input.value = '';
+            input.disabled = false;
+            input.classList.remove('shake');
+            modal.classList.add('active');
+            setTimeout(() => input.focus(), 150);
+        }
+
+        function closePinModal() {
+            const modal = document.getElementById('pin-modal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function handleBackdropClick(event) {
+            if (event.target.id === 'pin-modal') {
+                closePinModal();
+            }
+        }
+
+        function handlePinKeyUp(event) {
+            if (event.key === 'Enter') {
+                validateSecretPin();
+            }
+        }
+
+        function validateSecretPin() {
+            const input = document.getElementById('pin-input');
+            const errorMsg = document.getElementById('pin-error-msg');
+            const enteredVal = input.value.trim();
+
+            if (!enteredVal) {
+                errorMsg.innerText = "Masukkan PIN terlebih dahulu!";
+                input.focus();
+                return;
+            }
+
+            if (enteredVal === SECRET_PIN_CODE) {
+                sessionStorage.setItem('secret_unlocked', '130806');
+                errorMsg.style.color = '#10b981';
+                errorMsg.innerText = "PIN Benar! Membuka halaman khusus... ✨";
+                input.disabled = true;
+                setTimeout(() => {
+                    window.location.href = SPECIAL_PAGE_URL;
+                }, 600);
+            } else {
+                errorMsg.style.color = '#ef4444';
+                errorMsg.innerText = "PIN salah. Coba lagi ya!";
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 450);
+                input.value = '';
+                input.focus();
+            }
+        }
