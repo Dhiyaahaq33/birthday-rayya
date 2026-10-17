@@ -11,7 +11,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body>
 
@@ -35,29 +35,10 @@
         <button class="theme-toggle" onclick="toggleThemeSystem()" title="Ubah Tema">
             <i class="fas fa-moon" id="theme-icon"></i>
         </button>
-        <button class="nav-extra-btn" onclick="openPinModal()" title="Halaman Khusus">
+        <a href="special.html" class="theme-toggle" title="Halaman Khusus (PIN 130806)" style="text-decoration: none; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-sizing: border-box;">
             <i class="fas fa-home"></i>
-        </button>
+        </a>
     </header>
-
-    <!-- PIN ACCESS MODAL -->
-    <div id="pin-modal" class="pin-modal-backdrop" onclick="handleBackdropClick(event)">
-        <div class="pin-modal-card glass-card">
-            <button class="pin-modal-close" onclick="closePinModal()" title="Tutup">&times;</button>
-            <div class="pin-modal-icon">
-                <i class="fas fa-lock"></i>
-            </div>
-            <h3 style="margin-bottom: 0.5rem; color: var(--primary);">Halaman Khusus</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 1rem;">Masukkan PIN 6 digit untuk melanjutkan ke halaman khusus.</p>
-            <div class="pin-input-group">
-                <input type="password" id="pin-input" maxlength="6" inputmode="numeric" placeholder="••••••" autocomplete="off" onkeyup="handlePinKeyUp(event)">
-            </div>
-            <div id="pin-error-msg" class="pin-error-text"></div>
-            <div class="pin-modal-actions">
-                <button class="btn-prime" onclick="validateSecretPin()">Buka Halaman</button>
-            </div>
-        </div>
-    </div>
 
     <!-- FLOATING GLASS MENU NAVIGATION -->
     <nav class="floating-nav">
@@ -246,6 +227,6 @@
     <!-- ==========================================
        ENGINE LOGIC CORE (VANILLA JAVASCRIPT ES6)
     ========================================== -->
-    <script src="script.js"></script>
+    <script src="script.js?v=2.2"></script>
 </body>
 </html>

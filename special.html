@@ -11,10 +11,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.2">
 
     <style>
-        .special-page-wrapper {
+        .page-container {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,11 +25,94 @@
             margin: 0 auto;
         }
 
+        /* Lock Screen Styling */
+        #lock-screen-container {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .lock-icon-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: rgba(255, 143, 171, 0.15);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .pin-box {
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .pin-box input {
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 10px;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border: 2px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text);
+            outline: none;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        [data-theme="dark"] .pin-box input {
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .pin-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 143, 171, 0.25);
+        }
+
+        .pin-box input.shake {
+            animation: pinShakeAnim 0.45s ease;
+            border-color: #ef4444;
+        }
+
+        @keyframes pinShakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-9px); }
+            40%, 80% { transform: translateX(9px); }
+        }
+
+        #pin-feedback {
+            min-height: 24px;
+            font-size: 0.95rem;
+            color: #ef4444;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Unlocked Content Section */
+        #unlocked-content {
+            display: none;
+            width: 100%;
+            animation: contentPopIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes contentPopIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         .special-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 18px;
+            padding: 8px 20px;
             background: rgba(255, 143, 171, 0.15);
             color: var(--primary);
             border: 1px solid var(--primary);
@@ -39,90 +122,207 @@
             margin-bottom: 1.5rem;
         }
 
-        .back-home-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 28px;
-            background: var(--surface);
-            border: 1px solid var(--glass-border);
-            color: var(--text);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px var(--glass-shadow);
-            margin-top: 2rem;
-        }
-
-        .back-home-btn:hover {
-            color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px var(--glass-shadow);
-        }
-
         .placeholder-box {
-            border: 2px dashed var(--glass-border);
+            border: 2px dashed var(--primary);
             border-radius: 20px;
-            padding: 2.5rem 1.5rem;
-            margin: 2rem 0 1rem;
-            background: rgba(255, 255, 255, 0.2);
+            padding: 2.8rem 1.8rem;
+            margin: 2.2rem 0 1.5rem;
+            background: rgba(255, 255, 255, 0.25);
         }
 
         [data-theme="dark"] .placeholder-box {
-            background: rgba(30, 41, 59, 0.25);
+            background: rgba(30, 41, 59, 0.35);
+        }
+
+        .action-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-sec {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+            padding: 12px 28px;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-sec:hover {
+            color: var(--primary);
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px var(--glass-shadow);
         }
     </style>
-
-    <script>
-        // Keamanan: Cek apakah user sudah memasukkan PIN 130806
-        if (sessionStorage.getItem('secret_unlocked') !== '130806') {
-            alert('Akses terbatas! Silakan masukkan PIN terlebih dahulu melalui halaman utama.');
-            window.location.href = 'index.html';
-        }
-    </script>
 </head>
 <body>
 
-    <!-- MAIN ACCESS CONTROLS -->
+    <!-- MAIN ACCESS CONTROLS (Top Right) -->
     <header>
-        <button class="theme-toggle" onclick="toggleThemeSystem()" title="Ubah Tema">
+        <button class="theme-toggle" onclick="toggleThemeSystem()" title="Ubah Tema" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-sizing: border-box;">
             <i class="fas fa-moon" id="theme-icon"></i>
         </button>
-        <a href="index.html" class="nav-extra-btn" title="Kembali ke Beranda" style="text-decoration: none;">
+        <a href="index.html" class="theme-toggle" title="Kembali ke Beranda" style="text-decoration: none; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-sizing: border-box;">
             <i class="fas fa-arrow-left"></i>
         </a>
     </header>
 
-    <main class="special-page-wrapper">
-        <div class="glass-card">
-            <div class="special-badge">
-                <i class="fas fa-lock-open"></i> Private Room • 130806 Verified
+    <main class="page-container">
+        <!-- 1. LOCK SCREEN (Jika Belum Masukkan PIN) -->
+        <div id="lock-screen-container">
+            <div class="glass-card">
+                <div class="lock-icon-circle" id="lock-icon-circle">
+                    <i class="fas fa-lock" id="lock-icon"></i>
+                </div>
+                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Ruang Rahasia Rayya</h2>
+                <p style="font-size: 1rem; margin-bottom: 1rem;">Halaman ini terproteksi. Masukkan 6 digit PIN untuk membukanya:</p>
+
+                <div class="pin-box">
+                    <input type="password" id="pin-input" maxlength="6" inputmode="numeric" placeholder="••••••" autocomplete="off" onkeyup="handlePinEnter(event)" autofocus>
+                </div>
+
+                <div id="pin-feedback"></div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                    <button class="btn-prime" onclick="verifyEnteredPin()" style="width: 100%; max-width: 250px;">
+                        <i class="fas fa-key"></i> Buka Halaman
+                    </button>
+                    <a href="index.html" class="btn-sec" style="margin-top: 8px;">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </a>
+                </div>
             </div>
+        </div>
 
-            <h1 style="color: var(--primary);">Halaman Khusus Rayya</h1>
-            <p class="quote-text">"Ruang rahasia ini sudah berhasil terbuka."</p>
+        <!-- 2. UNLOCKED CONTENT (Tampil Setelah PIN 130806 Benar) -->
+        <div id="unlocked-content">
+            <div class="glass-card">
+                <div class="special-badge">
+                    <i class="fas fa-lock-open"></i> Private Room • 130806 Verified
+                </div>
 
-            <div class="placeholder-box">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">✨ 💌 ✨</div>
-                <h3 style="margin-bottom: 0.8rem; color: var(--text);">Halaman Siap Diisi!</h3>
-                <p style="max-width: 600px; margin: 0 auto; color: var(--text-light);">
-                    Halaman ini sudah aktif dan terproteksi PIN <strong>130806</strong>. 
-                    Tinggal kamu tentukan isi dan konten apa saja yang ingin ditampilkan di sini 
-                    (misalnya pesan khusus, galeri foto, memori perjalanan, atau surprise lainnya).
-                </p>
-            </div>
+                <h1 style="color: var(--primary); margin-bottom: 0.5rem;">Halaman Khusus Rayya</h1>
+                <p class="quote-text" style="margin: 1.5rem 0;">"Tempat spesial yang sekarang sudah terbuka untukmu."</p>
 
-            <div>
-                <a href="index.html" class="back-home-btn">
-                    <i class="fas fa-home"></i> Kembali ke Beranda
-                </a>
+                <div class="placeholder-box">
+                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">✨ 💌 🎂</div>
+                    <h3 style="margin-bottom: 1rem; color: var(--text);">Halaman Siap Diisi!</h3>
+                    <p style="max-width: 620px; margin: 0 auto; line-height: 1.8; color: var(--text-light);">
+                        Halaman ini sudah aktif dengan URL terpisah (<code style="background: rgba(255,143,171,0.2); padding: 2px 6px; border-radius: 6px;">special.html</code>). 
+                        Silakan beri tahu apa saja isi atau kejutan yang ingin kamu letakkan di sini 
+                        (misalnya: surat ucapan panjang, galeri foto kenangan, pesan tersembunyi, timeline, atau lagu khusus).
+                    </p>
+                </div>
+
+                <div class="action-row">
+                    <a href="index.html" class="btn-prime" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-home"></i> Kembali ke Beranda
+                    </a>
+                    <button onclick="lockPageAgain()" class="btn-sec">
+                        <i class="fas fa-lock"></i> Kunci Halaman Ini
+                    </button>
+                </div>
             </div>
         </div>
     </main>
 
     <script>
-        // System Theme Handler
+        const CORRECT_PIN = "130806";
+
+        // Cek status saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+            restoreTheme();
+            if (sessionStorage.getItem('secret_unlocked') === CORRECT_PIN) {
+                showUnlockedContent(false);
+            } else {
+                const pinInput = document.getElementById('pin-input');
+                if (pinInput) setTimeout(() => pinInput.focus(), 150);
+            }
+        });
+
+        function handlePinEnter(event) {
+            if (event.key === 'Enter') {
+                verifyEnteredPin();
+            }
+        }
+
+        function verifyEnteredPin() {
+            const input = document.getElementById('pin-input');
+            const feedback = document.getElementById('pin-feedback');
+            const val = input.value.trim();
+
+            if (!val) {
+                feedback.style.color = '#ef4444';
+                feedback.innerText = 'Ketik PIN 6 digit terlebih dahulu!';
+                input.focus();
+                return;
+            }
+
+            if (val === CORRECT_PIN) {
+                sessionStorage.setItem('secret_unlocked', CORRECT_PIN);
+                feedback.style.color = '#10b981';
+                feedback.innerText = 'PIN Benar! Membuka ruang rahasia... ✨';
+
+                // Animasi gembok terbuka
+                const circle = document.getElementById('lock-icon-circle');
+                const icon = document.getElementById('lock-icon');
+                if (circle && icon) {
+                    circle.style.borderColor = '#10b981';
+                    circle.style.background = 'rgba(16, 185, 129, 0.15)';
+                    circle.style.color = '#10b981';
+                    icon.className = 'fas fa-lock-open';
+                }
+
+                input.disabled = true;
+
+                setTimeout(() => {
+                    showUnlockedContent(true);
+                }, 700);
+            } else {
+                feedback.style.color = '#ef4444';
+                feedback.innerText = 'PIN salah. Coba lagi ya!';
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 450);
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function showUnlockedContent(animate) {
+            const lockScreen = document.getElementById('lock-screen-container');
+            const content = document.getElementById('unlocked-content');
+
+            if (animate) {
+                lockScreen.style.opacity = '0';
+                lockScreen.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                }, 400);
+            } else {
+                lockScreen.style.display = 'none';
+                content.style.display = 'block';
+            }
+        }
+
+        function lockPageAgain() {
+            sessionStorage.removeItem('secret_unlocked');
+            window.location.reload();
+        }
+
+        // Theme management
         function toggleThemeSystem() {
             const htmlNode = document.documentElement;
             const currentTheme = htmlNode.getAttribute('data-theme');
@@ -135,8 +335,7 @@
             themeIcon.className = targetTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
 
-        // Apply theme from storage on load
-        document.addEventListener("DOMContentLoaded", () => {
+        function restoreTheme() {
             const cachedTheme = localStorage.getItem('birthday_sys_theme');
             if (cachedTheme) {
                 document.documentElement.setAttribute('data-theme', cachedTheme);
@@ -145,7 +344,7 @@
                     themeIcon.className = cachedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
                 }
             }
-        });
+        }
     </script>
 </body>
 </html>
