@@ -1,0 +1,36 @@
+name: Birthday Email Automation (17 Agustus)
+
+on:
+  schedule:
+    # 17 Agustus 00:01 WIB = 16 Agustus 17:01 UTC
+    - cron: '1 17 16 8 *'
+  workflow_dispatch:
+    inputs:
+      recipient_override:
+        description: 'Email Penerima (Kosongkan jika memakai Secret RAYYA_EMAIL)'
+        required: false
+        default: ''
+      subject_override:
+        description: 'Subjek Email Kustom (Opsional)'
+        required: false
+        default: ''
+
+jobs:
+  send-birthday-greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Send Birthday Email
+        env:
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RAYYA_EMAIL: ${{ secrets.RAYYA_EMAIL }}
+        run: |
+          python scripts/send_birthday_email.py "${{ github.event.inputs.recipient_override }}" "${{ github.event.inputs.subject_override }}"
