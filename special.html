@@ -11,7 +11,57 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=2.3">
+    <link rel="stylesheet" href="style.css?v=2.4">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js">
+        // Confetti burst on unlock
+        function fireUnlockConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#ff8fab', '#ffd6e7', '#cdb4db', '#ffbe0b', '#ffffff'],
+                    zIndex: 10001
+                });
+            }
+        }
+
+        // Sparkle cursor
+        function initSparkleCursor() {
+            let lastSparkleTime = 0;
+            const sparkleEmojis = ['✨', '🌸', '⭐', '💫', '💖'];
+
+            function createSparkle(x, y) {
+                const now = Date.now();
+                if (now - lastSparkleTime < 50) return;
+                lastSparkleTime = now;
+
+                const particle = document.createElement('span');
+                particle.className = 'sparkle-particle';
+                particle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                
+                const randomX = (Math.random() - 0.5) * 40;
+                const randomY = -20 - Math.random() * 30;
+                const randomRot = (Math.random() - 0.5) * 60;
+
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--tx', `${randomX}px`);
+                particle.style.setProperty('--ty', `${randomY}px`);
+                particle.style.setProperty('--tr', `${randomRot}deg`);
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 850);
+            }
+
+            window.addEventListener('mousemove', (e) => createSparkle(e.clientX, e.clientY), { passive: true });
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches[0]) createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+        }
+        document.addEventListener('DOMContentLoaded', initSparkleCursor);
+
+    </script>
 
     <style>
         .page-container {
@@ -355,6 +405,19 @@
 </head>
 <body>
 
+    <!-- AMBIENT FLOATING CELEBRATION DECORATIONS -->
+    <div class="ambient-decorations" aria-hidden="true">
+        <div class="floating-deco deco-1">🎈</div>
+        <div class="floating-deco deco-2">🌸</div>
+        <div class="floating-deco deco-3">✨</div>
+        <div class="floating-deco deco-4">🎀</div>
+        <div class="floating-deco deco-5">⭐</div>
+        <div class="floating-deco deco-6">💌</div>
+        <div class="floating-deco deco-7">🎈</div>
+        <div class="floating-deco deco-8">🤍</div>
+    </div>
+
+
     <!-- MAIN ACCESS CONTROLS (Top Right) -->
     <header>
         <button class="theme-toggle" onclick="toggleThemeSystem()" title="Ubah Tema" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-sizing: border-box;">
@@ -555,10 +618,12 @@ Muhammad Yahya DH.</textarea>
                 setTimeout(() => {
                     lockScreen.style.display = 'none';
                     content.style.display = 'block';
+                    fireUnlockConfetti();
                 }, 400);
             } else {
                 lockScreen.style.display = 'none';
                 content.style.display = 'block';
+                    fireUnlockConfetti();
             }
         }
 
@@ -676,6 +741,55 @@ Muhammad Yahya DH.</textarea>
                 }
             }
         }
+    
+        // Confetti burst on unlock
+        function fireUnlockConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#ff8fab', '#ffd6e7', '#cdb4db', '#ffbe0b', '#ffffff'],
+                    zIndex: 10001
+                });
+            }
+        }
+
+        // Sparkle cursor
+        function initSparkleCursor() {
+            let lastSparkleTime = 0;
+            const sparkleEmojis = ['✨', '🌸', '⭐', '💫', '💖'];
+
+            function createSparkle(x, y) {
+                const now = Date.now();
+                if (now - lastSparkleTime < 50) return;
+                lastSparkleTime = now;
+
+                const particle = document.createElement('span');
+                particle.className = 'sparkle-particle';
+                particle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                
+                const randomX = (Math.random() - 0.5) * 40;
+                const randomY = -20 - Math.random() * 30;
+                const randomRot = (Math.random() - 0.5) * 60;
+
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--tx', `${randomX}px`);
+                particle.style.setProperty('--ty', `${randomY}px`);
+                particle.style.setProperty('--tr', `${randomRot}deg`);
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 850);
+            }
+
+            window.addEventListener('mousemove', (e) => createSparkle(e.clientX, e.clientY), { passive: true });
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches[0]) createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+        }
+        document.addEventListener('DOMContentLoaded', initSparkleCursor);
+
     </script>
 </body>
 </html>

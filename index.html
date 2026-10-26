@@ -11,16 +11,35 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=2.3">
+    <link rel="stylesheet" href="style.css?v=2.4">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+
+    <!-- AMBIENT FLOATING CELEBRATION DECORATIONS -->
+    <div class="ambient-decorations" aria-hidden="true">
+        <div class="floating-deco deco-1">🎈</div>
+        <div class="floating-deco deco-2">🌸</div>
+        <div class="floating-deco deco-3">✨</div>
+        <div class="floating-deco deco-4">🎀</div>
+        <div class="floating-deco deco-5">⭐</div>
+        <div class="floating-deco deco-6">🍰</div>
+        <div class="floating-deco deco-7">🎈</div>
+        <div class="floating-deco deco-8">🤍</div>
+    </div>
+
 
     <!-- ==========================================
        1. OPENING STAGE CONTAINER
     ========================================== -->
     <div id="opening-screen">
         <div class="narrative-container">
-            <div class="narrative-text" id="n1"><span id="logo-opening">🎂<br>Happy Birthday, Rayya</span></div>
+            <div class="narrative-text" id="n1">
+                <div class="opening-balloon-cloud">
+                    <span>🎈</span><span>✨</span><span>🎂</span><span>🌸</span><span>🎈</span>
+                </div>
+                <span id="logo-opening">Happy Birthday, Rayya!</span>
+            </div>
             <div class="narrative-text" id="n2">"Hai, Rayya..."</div>
             <div class="narrative-text" id="n3">"Selamat ulang tahun ya untuk seseorang yang selalu punya tempat spesial."</div>
             <div class="narrative-text" id="n4">"Ada sedikit ruang kecil yang sengaja kubuat khusus buat kamu hari ini."</div>
@@ -59,17 +78,48 @@
     <!-- WELCOME / HERO BLOCK -->
     <section id="welcome">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-sparkles"></i> 17 AGUSTUS • SPECIAL CELEBRATION</span>
             <h1 style="color: var(--primary);">Happy Birthday, Rayya! ✨</h1>
-            <p style="font-weight: 500; font-size: 1.2rem; color: var(--text);">🎉 Rayya Childora W. ("Houris") 🎉</p>
-            <p class="quote-text" style="margin: 2rem 0;">"Semoga umur baru ini membawa lebih banyak alasan untuk kamu tersenyum bahagia."</p>
+            <p style="font-weight: 600; font-size: 1.25rem; color: var(--text);">🎉 Rayya Childora W. ("Houris") 🎉</p>
+
+            <!-- AESTHETIC POLAROID FRAME -->
+            <div class="polaroid-wrapper">
+                <div class="polaroid-card">
+                    <div class="washi-tape"></div>
+                    <div class="polaroid-img-box">
+                        <img src="foto-rayya.png" alt="Rayya Childora W.">
+                    </div>
+                    <p class="polaroid-caption">Rayya Childora W. ("Houris") 🌸</p>
+                </div>
+            </div>
+
+            <p class="quote-text" style="margin: 1.5rem 0 2rem;">"Semoga umur baru ini membawa lebih banyak alasan untuk kamu tersenyum bahagia."</p>
             <p>Selamat bertambah usia, Rayya. Di hari yang spesial ini, semoga semua hal baik selalu datang menghampirimu, langkahmu selalu dipermudah, dan hari-harimu ke depan selalu terasa lebih ringan dan menyenangkan.</p>
             <p>Terima kasih ya sudah hadir dan jadi sosok yang begitu menyenangkan. Kebaikanmu, caramu tersenyum, dan caramu bercerita selalu berhasil bikin orang di sekitarmu — termasuk aku — merasa senang dan bersyukur bisa kenal kamu sejauh ini.</p>
+
+            <!-- INTERACTIVE BIRTHDAY CAKE & CANDLE -->
+            <div class="cake-interactive-box">
+                <div class="cake-container" onclick="blowCandleWish(this)" title="Klik untuk tiup lilin!">
+                    <div class="candle-stick">
+                        <div class="candle-flame" id="candle-flame"></div>
+                        <div class="candle-smoke" id="candle-smoke">💨</div>
+                    </div>
+                    <div class="cake-emoji-icon">🎂</div>
+                </div>
+                <p class="cake-instruction" id="cake-instruction-text">
+                    🕯️ <strong>Tiup Lilin & Make a Wish:</strong> Klik lilin di atas untuk meniupnya ya! ✨
+                </p>
+                <div class="cake-wish-banner" id="cake-wish-banner">
+                    🎉 Wish-mu sudah meluncur ke langit! Semoga semua impian dan kebaikan terkabul ya, Houris 🤍
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- SMART MIRROR CAMERA ACCESS -->
     <section id="mirror">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-camera-retro"></i> SPECIAL MIRROR</span>
             <h2>The Birthday Girl ✨</h2>
             <p>Coba tatap ke layar sebentar ya... Orang di depanmu ini adalah alasan hari ini jadi istimewa. Senyum terbaikmu itu selalu manis, jangan lupa itu ya, Rayya.</p>
 
@@ -91,6 +141,7 @@
     <!-- RANDOM BIRTHDAY WISHES -->
     <section id="affirmation">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-envelope-open-text"></i> DOAKU UNTUKMU</span>
             <h2>Kumpulan Doa Baik Buat Rayya 💌</h2>
             <p>Setiap kali kamu klik tombol di bawah ini,</p>
             <p>akan muncul satu doa tulus yang kupanjatkan khusus buat hari ulang tahunmu.</p>
@@ -104,6 +155,7 @@
     <!-- MOOD MONITORING HUB -->
     <section id="mood">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-heart"></i> MOOD TODAY</span>
             <h2>Gimana Perasaanmu Hari Ini, Rayya? 🌸</h2>
             <p>Gimana perasaanmu di hari ulang tahunmu ini? Apapun yang lagi kamu rasain, semoga harimu tetap terasa berkesan dan menyenangkan ya.</p>
             <div class="mood-grid">
@@ -121,6 +173,7 @@
     <!-- GRATITUDE DIARY JOURNAL -->
     <section id="journal">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-feather"></i> WISH CAPSULE</span>
             <h2>Lembaran Harapan & Cerita Baru 📖</h2>
             <p>Tuliskan satu harapan terbesarmu atau hal yang paling kamu syukuri di umur barumu ini...</p>
             <div class="diary-container">
@@ -135,6 +188,7 @@
     <!-- BIRTHDAY LITTLE GIFTS CHECKLIST -->
     <section id="challenge">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-gift"></i> MINI MISSIONS</span>
             <h2>5 Hal Kecil Hari Ini Buat Rayya 🎁</h2>
             <p>(Coba lakuin ini ya, biar harimu makin berkesan hari ini ^^)</p>
 
@@ -171,24 +225,49 @@
     <!-- RELAXATION SOUNDSCAPE PLAYER -->
     <section id="music">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-headphones"></i> AMBIENCE SOUND</span>
             <h2>Birthday Ambience 🎶</h2>
             <p>Nyalakan musik penenang suasana ini untuk menemani momen spesialmu hari ini.</p>
             <div class="music-grid">
                 <div class="track-card" onclick="controlAudioTracks(this, 'Rain')">
                     <i class="fas fa-cloud-showers-heavy"></i>
                     <span>Rain</span>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
                 </div>
                 <div class="track-card" onclick="controlAudioTracks(this, 'Ocean')">
                     <i class="fas fa-water"></i>
                     <span>Ocean</span>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
                 </div>
                 <div class="track-card" onclick="controlAudioTracks(this, 'Forest')">
                     <i class="fas fa-tree"></i>
                     <span>Forest</span>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
                 </div>
                 <div class="track-card" onclick="controlAudioTracks(this, 'Piano')">
                     <i class="fas fa-music"></i>
                     <span>Piano</span>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,6 +276,7 @@
     <!-- BIRTHDAY FACTS STATISTICS -->
     <section id="stats">
         <div class="glass-card">
+            <span class="section-badge"><i class="fas fa-chart-line"></i> HAPPINESS METER</span>
             <h2>Birthday Happiness Meter ✨</h2>
             <div class="stat-circle" id="counter-fact">0%</div>
             <p style="font-weight: 500;">Semoga hari ini dan hari-hari seterusnya dipenuhi banyak kebahagiaan, tawa, dan hal-hal menyenangkan buat kamu, Rayya.</p>
@@ -227,6 +307,6 @@
     <!-- ==========================================
        ENGINE LOGIC CORE (VANILLA JAVASCRIPT ES6)
     ========================================== -->
-    <script src="script.js?v=2.3"></script>
+    <script src="script.js?v=2.4"></script>
 </body>
 </html>

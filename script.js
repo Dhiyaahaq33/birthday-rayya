@@ -83,6 +83,7 @@
 
             // Putar salah satu musik yang tersedia secara acak
             playRandomAudioTrack();
+            fireConfetti('celebration');
         }
 
         function playRandomAudioTrack() {
@@ -185,6 +186,7 @@
                 const selectorIndex = Math.floor(Math.random() * affirmationBank.length);
                 outputBoard.innerText = `"${affirmationBank[selectorIndex]}"`;
                 outputBoard.style.opacity = '1';
+                fireConfetti('stars');
             }, 300);
         }
 
@@ -228,6 +230,7 @@ function processMoodSelection(emojiSymbol, labelString) {
         function commitJournalEntry() {
             const currentContent = document.getElementById('journal-editor').value;
             localStorage.setItem('birthday_stored_journal', currentContent);
+            fireConfetti("hearts");
             alert("Harapan dan ceritamu sudah tersimpan rapi di sini ya, Houris. ✨");
         }
 
@@ -253,6 +256,7 @@ function processMoodSelection(emojiSymbol, labelString) {
             const progressLabel = document.getElementById('progress-status');
             if (operationalRatio === 100) {
                 progressLabel.innerHTML = `<strong>Progress: 100% — 🎉 Great Job!</strong>`;
+                fireConfetti('grand');
             } else {
                 progressLabel.innerText = `Progress: ${operationalRatio}%`;
             }
@@ -415,3 +419,164 @@ function processMoodSelection(emojiSymbol, labelString) {
                 input.focus();
             }
         }
+
+/* ==========================================
+   STAGE 11: CONFETTI & CELEBRATION ENGINE
+========================================== */
+
+function fireConfetti(preset) {
+    if (typeof confetti !== 'function') return;
+
+    try {
+        if (preset === 'celebration' || preset === 'grand') {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 },
+                zIndex: 10001
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+                colors: ['#ff8fab', '#ffd6e7', '#cdb4db', '#ffbe0b']
+            });
+            fire(0.2, {
+                spread: 60,
+                colors: ['#ff8fab', '#ffffff', '#cdb4db']
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8,
+                colors: ['#ff8fab', '#ffd6e7', '#fbcfe8']
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2,
+                colors: ['#ffbe0b', '#fb5607']
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+                colors: ['#ff8fab', '#cdb4db']
+            });
+        } else if (preset === 'stars') {
+            confetti({
+                particleCount: 35,
+                spread: 50,
+                origin: { y: 0.65 },
+                colors: ['#ff8fab', '#ffd6e7', '#cdb4db', '#ffbe0b', '#ffffff'],
+                shapes: ['circle'],
+                scalar: 0.9,
+                zIndex: 10001
+            });
+        } else if (preset === 'hearts') {
+            confetti({
+                particleCount: 50,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff8fab', '#f43f5e', '#ffd6e7', '#cdb4db'],
+                scalar: 1,
+                zIndex: 10001
+            });
+        }
+    } catch (err) {
+        console.log("Confetti trigger note:", err);
+    }
+}
+
+/* --- STAGE 12: INTERACTIVE CANDLE & CAKE --- */
+let candleBlownState = false;
+
+function blowCandleWish(containerElement) {
+    if (candleBlownState) {
+        // Can be relit on second click
+        const flame = document.getElementById('candle-flame');
+        const smoke = document.getElementById('candle-smoke');
+        const banner = document.getElementById('cake-wish-banner');
+        const instruction = document.getElementById('cake-instruction-text');
+
+        candleBlownState = false;
+        flame.classList.remove('blown');
+        smoke.classList.remove('active');
+        banner.style.display = 'none';
+        instruction.innerHTML = '🕯️ <strong>Tiup Lilin & Make a Wish:</strong> Klik lilin di atas untuk meniupnya ya! ✨';
+        return;
+    }
+
+    candleBlownState = true;
+    const flame = document.getElementById('candle-flame');
+    const smoke = document.getElementById('candle-smoke');
+    const banner = document.getElementById('cake-wish-banner');
+    const instruction = document.getElementById('cake-instruction-text');
+
+    if (flame) flame.classList.add('blown');
+    if (smoke) {
+        smoke.classList.add('active');
+        setTimeout(() => smoke.classList.remove('active'), 2000);
+    }
+
+    fireConfetti('celebration');
+
+    if (banner) {
+        banner.style.display = 'block';
+    }
+    if (instruction) {
+        instruction.innerHTML = '✨ <strong>Lilin Ditiup!</strong> Harapanmu sudah meluncur ke langit... Klik lagi jika ingin menyalakannya kembali 🎂';
+    }
+}
+
+/* --- STAGE 13: SPARKLE CURSOR TRAIL --- */
+function initSparkleCursor() {
+    let lastSparkleTime = 0;
+    const sparkleEmojis = ['✨', '🌸', '⭐', '💫', '💖'];
+
+    function createSparkle(x, y) {
+        const now = Date.now();
+        if (now - lastSparkleTime < 50) return; // Throttle performance
+        lastSparkleTime = now;
+
+        const particle = document.createElement('span');
+        particle.className = 'sparkle-particle';
+        particle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        
+        const randomX = (Math.random() - 0.5) * 40;
+        const randomY = -20 - Math.random() * 30;
+        const randomRot = (Math.random() - 0.5) * 60;
+
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.setProperty('--tx', `${randomX}px`);
+        particle.style.setProperty('--ty', `${randomY}px`);
+        particle.style.setProperty('--tr', `${randomRot}deg`);
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 850);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+        createSparkle(e.clientX, e.clientY);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+            createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+}
+
+// Initialize sparkle cursor once DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initSparkleCursor();
+});

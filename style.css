@@ -624,3 +624,371 @@
             section { padding: 80px 15px; }
             .glass-card { padding: 2rem 1.5rem; }
         }
+
+/* ==========================================
+   CELEBRATION DECORATIONS & AESTHETIC BOOST
+========================================== */
+
+/* Cute decorative badge for sections */
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(255, 143, 171, 0.22), rgba(205, 180, 219, 0.22));
+    border: 1px solid rgba(255, 143, 171, 0.45);
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 12px rgba(255, 143, 171, 0.12);
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .section-badge {
+    background: linear-gradient(135deg, rgba(249, 168, 212, 0.15), rgba(71, 85, 105, 0.3));
+    border-color: rgba(249, 168, 212, 0.35);
+    color: #fbcfe8;
+}
+
+/* Enhanced Glass Card with Iridescent Hover */
+.glass-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transition: left 0.85s ease;
+    pointer-events: none;
+}
+
+.glass-card:hover::before {
+    left: 100%;
+}
+
+/* Ambient floating elements in the background */
+.ambient-decorations {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-deco {
+    position: absolute;
+    user-select: none;
+    opacity: 0.72;
+    filter: drop-shadow(0 4px 12px rgba(255, 143, 171, 0.3));
+    animation: floatDeco 12s infinite ease-in-out alternate;
+}
+
+.deco-1 { top: 10%; left: 3%; font-size: 2.2rem; animation-duration: 9s; animation-delay: 0s; }
+.deco-2 { top: 35%; left: 2%; font-size: 1.8rem; animation-duration: 11s; animation-delay: -2s; }
+.deco-3 { top: 62%; left: 4%; font-size: 2.4rem; animation-duration: 13s; animation-delay: -4s; }
+.deco-4 { top: 84%; left: 3%; font-size: 1.9rem; animation-duration: 10s; animation-delay: -1s; }
+
+.deco-5 { top: 12%; right: 3%; font-size: 2.3rem; animation-duration: 10s; animation-delay: -3s; }
+.deco-6 { top: 38%; right: 2%; font-size: 1.9rem; animation-duration: 12s; animation-delay: -5s; }
+.deco-7 { top: 65%; right: 3%; font-size: 2.5rem; animation-duration: 14s; animation-delay: -2s; }
+.deco-8 { top: 88%; right: 4%; font-size: 1.8rem; animation-duration: 9s; animation-delay: -4s; }
+
+@keyframes floatDeco {
+    0% { transform: translateY(0px) rotate(0deg) scale(1); }
+    50% { transform: translateY(-24px) rotate(8deg) scale(1.08); }
+    100% { transform: translateY(12px) rotate(-6deg) scale(0.95); }
+}
+
+/* Sparkle cursor particles */
+.sparkle-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    font-size: 1.25rem;
+    animation: sparkleFly 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    user-select: none;
+}
+
+@keyframes sparkleFly {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1.2) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx, 0px), var(--ty, -25px)) scale(0.2) rotate(var(--tr, 45deg));
+    }
+}
+
+/* Polaroid Aesthetic Card */
+.polaroid-wrapper {
+    margin: 1.5rem auto 2.2rem;
+    display: inline-block;
+    perspective: 800px;
+}
+
+.polaroid-card {
+    position: relative;
+    background: #ffffff;
+    padding: 14px 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(255, 143, 171, 0.2);
+    transform: rotate(-2.5deg);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+[data-theme="dark"] .polaroid-card {
+    background: #1e293b;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(249, 168, 212, 0.15);
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) scale(1.05) translateY(-6px);
+    box-shadow: 0 22px 50px rgba(255, 143, 171, 0.28);
+}
+
+.washi-tape {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 95px; height: 26px;
+    background: rgba(255, 182, 193, 0.75);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-radius: 2px;
+    z-index: 2;
+}
+
+[data-theme="dark"] .washi-tape {
+    background: rgba(249, 168, 212, 0.55);
+}
+
+.polaroid-img-box {
+    width: 230px; height: 240px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f1f5f9;
+}
+
+.polaroid-img-box img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.polaroid-card:hover .polaroid-img-box img {
+    transform: scale(1.06);
+}
+
+.polaroid-caption {
+    font-family: var(--font-quotes);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #334155;
+    margin: 14px 0 2px;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .polaroid-caption {
+    color: #f1f5f9;
+}
+
+/* Interactive Cake & Candle Section */
+.cake-interactive-box {
+    margin: 2.5rem auto 1.5rem;
+    padding: 1.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    border: 2px dashed rgba(255, 143, 171, 0.65);
+    max-width: 520px;
+    box-shadow: 0 8px 24px rgba(255, 143, 171, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .cake-interactive-box {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(249, 168, 212, 0.4);
+}
+
+.cake-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cake-container:hover {
+    transform: scale(1.12);
+}
+
+.candle-stick {
+    position: relative;
+    width: 14px; height: 34px;
+    background: repeating-linear-gradient(45deg, #ffffff, #ffffff 4px, #ff8fab 4px, #ff8fab 8px);
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.candle-flame {
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    width: 18px; height: 24px;
+    background: radial-gradient(circle at 50% 80%, #fff 0%, #ffbe0b 50%, #fb5607 100%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    box-shadow: 0 0 14px #ffbe0b, 0 0 28px #fb5607;
+    animation: flameFlicker 1.2s infinite alternate ease-in-out;
+    transition: all 0.3s ease;
+}
+
+.candle-flame.blown {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+}
+
+.candle-smoke {
+    position: absolute;
+    top: -26px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.candle-smoke.active {
+    opacity: 0.85;
+    animation: smokeRise 1.8s forwards ease-out;
+}
+
+@keyframes flameFlicker {
+    0% { transform: translateX(-50%) rotate(-3deg) scale(1); }
+    50% { transform: translateX(-50%) rotate(4deg) scale(1.1, 0.95); }
+    100% { transform: translateX(-50%) rotate(-4deg) scale(0.95, 1.05); }
+}
+
+@keyframes smokeRise {
+    0% { opacity: 0.9; transform: translateX(-50%) translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-38px) scale(1.8); }
+}
+
+.cake-emoji-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-top: -2px;
+    filter: drop-shadow(0 6px 16px rgba(255, 143, 171, 0.35));
+}
+
+.cake-instruction {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin: 14px 0 4px;
+    font-weight: 600;
+}
+
+.cake-wish-banner {
+    display: none;
+    margin-top: 14px;
+    padding: 14px 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 143, 171, 0.25), rgba(205, 180, 219, 0.3));
+    border: 1px solid var(--primary);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1.05rem;
+    animation: modalPopIn 0.4s ease forwards;
+}
+
+/* Soundwave equalizer on playing music */
+.equalizer-wave {
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 18px;
+    margin-top: 8px;
+}
+
+.track-card.playing .equalizer-wave {
+    display: flex;
+}
+
+.equalizer-bar {
+    width: 4px;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 2px;
+    animation: soundWave 0.8s infinite ease-in-out alternate;
+}
+
+.equalizer-bar:nth-child(1) { animation-delay: 0.1s; height: 40%; }
+.equalizer-bar:nth-child(2) { animation-delay: 0.3s; height: 90%; }
+.equalizer-bar:nth-child(3) { animation-delay: 0.2s; height: 60%; }
+.equalizer-bar:nth-child(4) { animation-delay: 0.4s; height: 80%; }
+
+@keyframes soundWave {
+    0% { height: 25%; }
+    100% { height: 100%; }
+}
+
+/* Ribbon decor banner */
+.festive-ribbon {
+    position: relative;
+    display: inline-block;
+    padding: 6px 24px;
+    background: linear-gradient(135deg, #ff8fab, #cdb4db);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(255, 143, 171, 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.festive-ribbon::before, .festive-ribbon::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    border: 12px solid #ff8fab;
+    z-index: -1;
+}
+
+/* Floating balloons in opening screen */
+.opening-balloon-cloud {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.opening-balloon-cloud span {
+    display: inline-block;
+    animation: floatBalloon 3s infinite ease-in-out alternate;
+}
+
+.opening-balloon-cloud span:nth-child(2) { animation-delay: 0.5s; }
+.opening-balloon-cloud span:nth-child(3) { animation-delay: 1s; }
+.opening-balloon-cloud span:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes floatBalloon {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-15px) rotate(6deg); }
+}
