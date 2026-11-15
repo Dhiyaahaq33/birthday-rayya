@@ -45,11 +45,22 @@
             "Kenangan tentang apa yang kita lewati masih tersimpan rapi di sini."
         ];
 
-        /* --- STAGE 1: NARRATIVE SCREEN RUNNER --- */
+        /* --- STAGE 1: NARRATIVE SCREEN & GATE CONTROLLER --- */
         document.addEventListener("DOMContentLoaded", () => {
-            executeNarrativeSequence();
+            initStarrySkyCanvas();
+            initEntranceGate();
             restoreSystemStoredData();
             runStatisticsCounter();
+
+            // Check if gate is already unlocked in this session
+            if (sessionStorage.getItem('main_gate_unlocked') === '1708') {
+                const gate = document.getElementById('entrance-gate');
+                if (gate) {
+                    gate.style.display = 'none';
+                    gate.classList.add('unlocked');
+                }
+                executeNarrativeSequence();
+            }
         });
 
         function executeNarrativeSequence() {
@@ -230,7 +241,7 @@ function processMoodSelection(emojiSymbol, labelString) {
             const currentContent = document.getElementById('journal-editor').value;
             localStorage.setItem('birthday_stored_journal', currentContent);
             fireConfetti("hearts");
-            alert("Harapan dan sepenggal ceritamu telah tersimpan di dalam ruang sunyi ini... — Anonymous 🌒");
+            alert("Harapan dan ceritamu telah tersimpan rapi di dalam ruang sunyi ini. — Anonymous");
         }
 
         function viewJournalEntry() {
@@ -271,11 +282,23 @@ function processMoodSelection(emojiSymbol, labelString) {
         // Mapping nama tombol ke file audio asli
         // Kamu bisa pakai link internet (untuk tes langsung) atau file lokal di folder music/ kamu
         const audioFiles = {
-        'Rain': 'rain.mp3',
-        'Ocean': 'ocean.mp3',
-        'Forest': 'forest.mp3',
-        'Piano': 'piano.mp3'
+            'Piano': 'piano.mp3',
+            'Rain': 'rain.mp3',
+            'Forest': 'forest.mp3',
+            'Ocean': 'ocean.mp3',
+            'Romantic Piano': 'piano.mp3',
+            'Midnight Rain': 'rain.mp3',
+            'Night Serenade': 'forest.mp3',
+            'Deep Ocean': 'ocean.mp3'
         };
+
+        const romanticTrackList = [
+            { name: 'Romantic Piano', file: 'piano.mp3', label: 'Denting Penuh Rindu' },
+            { name: 'Midnight Rain', file: 'rain.mp3', label: 'Hujan di Larut Malam' },
+            { name: 'Night Serenade', file: 'forest.mp3', label: 'Angin & Melodi Sunyi' },
+            { name: 'Deep Ocean', file: 'ocean.mp3', label: 'Deburan Ombak Hangat' }
+        ];
+        let currentTrackIndex = 0;
 
         function controlAudioTracks(domElement, toneProfile) {
             const isPlaying = domElement.classList.contains('playing');
@@ -293,19 +316,19 @@ function processMoodSelection(emojiSymbol, labelString) {
             if (!isPlaying) {
                 domElement.classList.add('playing');
                 
-                // Ambil file audio berdasarkan tombol yang diklik (Rain/Ocean/dll)
-                currentAudio = new Audio(audioFiles[toneProfile]);
-                currentAudio.loop = true; // Supaya musiknya berputar terus-menerus (ambient effect)
+                const audioSrc = audioFiles[toneProfile] || 'piano.mp3';
+                currentAudio = new Audio(audioSrc);
+                currentAudio.loop = true;
                 
-                // Jalankan audio (ditangkap dengan .catch jika diblokir kebijakan browser)
-                currentAudio.play().catch(err => {
-                    console.log("Pemutaran audio diblokir oleh browser sebelum ada interaksi pengguna:", err);
+                currentAudio.play().then(() => {
+                    updateFloatingMusicWidget(toneProfile, true);
+                }).catch(err => {
+                    console.log("Audio play info:", err);
+                    updateFloatingMusicWidget(toneProfile, false);
                 });
-                
-                console.log(`Audio Streaming Engine Initialized For: ${toneProfile}`);
             } else {
-                // Jika tombol yang sama diklik lagi, musik otomatis berhenti (efek toggle)
                 currentAudio = null;
+                updateFloatingMusicWidget(toneProfile, false);
             }
         }
 
@@ -579,3 +602,418 @@ function initSparkleCursor() {
 document.addEventListener('DOMContentLoaded', () => {
     initSparkleCursor();
 });
+
+
+
+/* ==========================================================================
+   STAGE 14: WEB AUDIO ROMANTIC SOUND EFFECTS GENERATOR
+========================================================================== */
+let audioCtxInstance = null;
+
+function getAudioContext() {
+    if (!audioCtxInstance) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+            audioCtxInstance = new AudioContextClass();
+        }
+    }
+    if (audioCtxInstance && audioCtxInstance.state === 'suspended') {
+        audioCtxInstance.resume();
+    }
+    return audioCtxInstance;
+}
+
+// Breathtaking Celestial Romantic Harp Chime (Arpeggiated)
+function playRomanticChime() {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const notes = [369.99, 466.16, 554.37, 739.99, 830.61, 1108.73]; // F#4, A#4, C#5, F#5, G#5, C#6
+    const startTime = ctx.currentTime;
+
+    notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime + (idx * 0.08));
+
+        gain.gain.setValueAtTime(0, startTime + (idx * 0.08));
+        gain.gain.linearRampToValueAtTime(0.22, startTime + (idx * 0.08) + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + (idx * 0.08) + 1.8);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime + (idx * 0.08));
+        osc.stop(startTime + (idx * 0.08) + 1.85);
+    });
+}
+
+// Delicate Crystalline Keypad Click
+function playSoftKeyClick() {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(880 + (Math.random() * 200), ctx.currentTime);
+
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.09);
+}
+
+// Warm Heartbeat Pulse Sound
+function playHeartbeatSFX() {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    [0, 0.22].forEach((delay) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(85, ctx.currentTime + delay);
+        osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + delay + 0.12);
+
+        gain.gain.setValueAtTime(0.3, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.15);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.16);
+    });
+}
+
+
+/* ==========================================================================
+   STAGE 15: 4-DIGIT ENTRANCE GATE (PIN: 1708)
+========================================================================== */
+const GATE_PIN_CODE = "1708";
+
+function initEntranceGate() {
+    const digits = document.querySelectorAll('.gate-digit');
+    if (!digits || digits.length === 0) return;
+
+    digits.forEach((input, index) => {
+        // Auto-shift to next input on typing
+        input.addEventListener('input', (e) => {
+            const val = e.target.value.replace(/[^0-9]/g, '');
+            e.target.value = val ? val.slice(-1) : '';
+
+            if (e.target.value) {
+                playSoftKeyClick();
+                if (index < digits.length - 1) {
+                    digits[index + 1].focus();
+                } else {
+                    // All 4 digits filled -> auto-submit
+                    submitGatePin();
+                }
+            }
+        });
+
+        // Handle backspace navigation
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !input.value && index > 0) {
+                digits[index - 1].focus();
+            } else if (e.key === 'Enter') {
+                submitGatePin();
+            }
+        });
+
+        // Handle paste event (e.g. paste '1708')
+        input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
+            if (pastedText) {
+                for (let i = 0; i < digits.length; i++) {
+                    digits[i].value = pastedText[i] || '';
+                }
+                if (pastedText.length >= 4) {
+                    submitGatePin();
+                } else {
+                    const nextFocusIndex = Math.min(pastedText.length, digits.length - 1);
+                    digits[nextFocusIndex].focus();
+                }
+            }
+        });
+    });
+}
+
+function submitGatePin() {
+    const digits = document.querySelectorAll('.gate-digit');
+    const feedback = document.getElementById('gate-feedback');
+    const lockIcon = document.getElementById('gate-lock-icon');
+    const lockCircle = document.getElementById('gate-icon-circle');
+    const gateScreen = document.getElementById('entrance-gate');
+
+    let enteredPin = "";
+    digits.forEach(d => enteredPin += d.value);
+
+    if (enteredPin.length < 4) {
+        feedback.style.color = '#f43f5e';
+        feedback.innerText = "Masukkan 4 digit tanggal kelahiranmu... (DDMM)";
+        return;
+    }
+
+    if (enteredPin === GATE_PIN_CODE) {
+        sessionStorage.setItem('main_gate_unlocked', '1708');
+
+        // Romantic unlock animations
+        playRomanticChime();
+        fireConfetti('celebration');
+
+        feedback.style.color = '#10b981';
+        feedback.innerHTML = "✨ Kunci Terbuka... Selamat Datang di Ruang Kenanganmu, Houris 🌒";
+
+        if (lockIcon) lockIcon.className = "fas fa-lock-open";
+        if (lockCircle) {
+            lockCircle.style.borderColor = '#10b981';
+            lockCircle.style.color = '#10b981';
+            lockCircle.style.boxShadow = '0 0 35px rgba(16, 185, 129, 0.4)';
+        }
+
+        digits.forEach(d => d.disabled = true);
+
+        setTimeout(() => {
+            if (gateScreen) {
+                gateScreen.classList.add('unlocked');
+                setTimeout(() => {
+                    gateScreen.style.display = 'none';
+                    executeNarrativeSequence();
+                }, 800);
+            }
+        }, 900);
+    } else {
+        feedback.style.color = '#f43f5e';
+        feedback.innerText = "Bukan tanggal itu... Coba ingat kembali hari kelahiranmu (DDMM) 🥀";
+        
+        playHeartbeatSFX();
+
+        digits.forEach(d => {
+            d.classList.add('error-shake');
+            d.value = '';
+        });
+
+        setTimeout(() => {
+            digits.forEach(d => d.classList.remove('error-shake'));
+            if (digits[0]) digits[0].focus();
+        }, 500);
+    }
+}
+
+
+/* ==========================================================================
+   STAGE 16: FLOATING ROMANTIC AUDIO PLAYER WIDGET
+========================================================================== */
+function updateFloatingMusicWidget(trackName, isPlaying) {
+    const pill = document.getElementById('floating-music-pill');
+    const disc = document.getElementById('vinyl-disc');
+    const trackLabel = document.getElementById('pill-track-name');
+    const playIcon = document.getElementById('pill-play-icon');
+
+    if (!pill) return;
+
+    if (trackLabel) trackLabel.innerText = trackName || 'Romantic Ballad';
+
+    if (isPlaying) {
+        if (disc) disc.classList.add('spinning');
+        if (playIcon) playIcon.className = 'fas fa-pause';
+    } else {
+        if (disc) disc.classList.remove('spinning');
+        if (playIcon) playIcon.className = 'fas fa-play';
+    }
+}
+
+function togglePlayGlobalAudio(event) {
+    if (event) event.stopPropagation();
+
+    if (currentAudio) {
+        if (!currentAudio.paused) {
+            currentAudio.pause();
+            updateFloatingMusicWidget(romanticTrackList[currentTrackIndex].name, false);
+            document.querySelectorAll('.track-card').forEach(c => c.classList.remove('playing'));
+        } else {
+            currentAudio.play().then(() => {
+                updateFloatingMusicWidget(romanticTrackList[currentTrackIndex].name, true);
+            });
+        }
+    } else {
+        // Start first track
+        const track = romanticTrackList[currentTrackIndex];
+        playTrackByIndex(currentTrackIndex);
+    }
+}
+
+function playNextRomanticTrack(event) {
+    if (event) event.stopPropagation();
+    currentTrackIndex = (currentTrackIndex + 1) % romanticTrackList.length;
+    playTrackByIndex(currentTrackIndex);
+}
+
+function playTrackByIndex(idx) {
+    const track = romanticTrackList[idx];
+    if (!track) return;
+
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+
+    currentAudio = new Audio(track.file);
+    currentAudio.loop = true;
+    currentAudio.play().then(() => {
+        updateFloatingMusicWidget(track.name, true);
+
+        // Highlight matching card in music grid
+        document.querySelectorAll('.track-card').forEach(card => {
+            if (card.textContent.toLowerCase().includes(track.name.toLowerCase().split(' ')[0])) {
+                card.classList.add('playing');
+            } else {
+                card.classList.remove('playing');
+            }
+        });
+    }).catch(err => console.log("Audio play info:", err));
+}
+
+function toggleFloatingMusicDropdown(event) {
+    // Smooth scroll to music section
+    const musicSec = document.getElementById('music');
+    if (musicSec) {
+        musicSec.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+
+/* ==========================================================================
+   STAGE 17: INTERACTIVE SKY LANTERN RELEASE (LENTERA HARAPAN)
+========================================================================== */
+function releaseSkyLantern() {
+    playRomanticChime();
+    fireConfetti('stars');
+
+    const lantern = document.createElement('div');
+    lantern.className = 'sky-lantern';
+    lantern.innerText = '🏮';
+
+    const randomX = Math.random() * (window.innerWidth - 100) + 50;
+    lantern.style.left = `${randomX}px`;
+
+    document.body.appendChild(lantern);
+
+    setTimeout(() => {
+        lantern.remove();
+    }, 9000);
+
+    alert("Lentera harapanmu telah membubung tinggi ke langit malam... Semoga semua doa baikmu dikabulkan semesta, Houris. — Anonymous 🏮✨");
+}
+
+
+/* ==========================================================================
+   STAGE 18: INTERACTIVE STARRY NIGHT CANVAS ENGINE
+========================================================================== */
+function initStarrySkyCanvas() {
+    const canvas = document.getElementById('starry-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initStars();
+    });
+
+    const starCount = Math.floor((width * height) / 9000);
+    const stars = [];
+
+    function initStars() {
+        stars.length = 0;
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.5 + 0.3,
+                baseAlpha: Math.random() * 0.7 + 0.2,
+                twinkleSpeed: Math.random() * 0.02 + 0.005,
+                twinkleAngle: Math.random() * Math.PI * 2
+            });
+        }
+    }
+    initStars();
+
+    // Shooting meteor system
+    const meteors = [];
+    function spawnMeteor() {
+        if (Math.random() < 0.025) {
+            meteors.push({
+                x: Math.random() * width * 0.8,
+                y: Math.random() * height * 0.4,
+                length: Math.random() * 80 + 50,
+                speed: Math.random() * 5 + 4,
+                angle: Math.PI / 4,
+                alpha: 1
+            });
+        }
+    }
+
+    function renderStarrySky() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw soft twinkling stars
+        for (let i = 0; i < stars.length; i++) {
+            const s = stars[i];
+            s.twinkleAngle += s.twinkleSpeed;
+            const currentAlpha = s.baseAlpha + Math.sin(s.twinkleAngle) * 0.3;
+
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(244, 214, 240, ${Math.max(0.1, currentAlpha)})`;
+            ctx.fill();
+        }
+
+        // Spawn & render shooting stars
+        spawnMeteor();
+        for (let i = meteors.length - 1; i >= 0; i--) {
+            const m = meteors[i];
+            m.x += Math.cos(m.angle) * m.speed;
+            m.y += Math.sin(m.angle) * m.speed;
+            m.alpha -= 0.015;
+
+            if (m.alpha <= 0) {
+                meteors.splice(i, 1);
+                continue;
+            }
+
+            const tailX = m.x - Math.cos(m.angle) * m.length;
+            const tailY = m.y - Math.sin(m.angle) * m.length;
+
+            const grad = ctx.createLinearGradient(tailX, tailY, m.x, m.y);
+            grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+            grad.addColorStop(1, `rgba(244, 114, 182, ${m.alpha})`);
+
+            ctx.beginPath();
+            ctx.moveTo(tailX, tailY);
+            ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+        }
+
+        requestAnimationFrame(renderStarrySky);
+    }
+
+    requestAnimationFrame(renderStarrySky);
+}

@@ -992,3 +992,363 @@
     0% { transform: translateY(0px) rotate(0deg); }
     100% { transform: translateY(-15px) rotate(6deg); }
 }
+
+
+/* ==========================================================================
+   ROMANTIC NOCTURNAL MASTERPIECE ENGINE (ENTRANCE GATE & AESTHETICS)
+========================================================================== */
+
+/* 1. INTERACTIVE ROMANTIC STARRY SKY CANVAS */
+#starry-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 2. ENTRANCE GATE SCREEN (PIN: 1708) */
+#entrance-gate {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% 40%, rgba(30, 27, 75, 0.95) 0%, rgba(11, 15, 25, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#entrance-gate.unlocked {
+    opacity: 0;
+    transform: scale(1.06);
+    pointer-events: none;
+}
+
+.entrance-gate-card {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid rgba(244, 114, 182, 0.35);
+    border-radius: 32px;
+    padding: 3rem 2.2rem;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(244, 114, 182, 0.15);
+    backdrop-filter: blur(20px);
+    animation: gateCardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gateCardPop {
+    from { opacity: 0; transform: translateY(30px) scale(0.92); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.gate-lock-icon-circle {
+    width: 80px; height: 80px;
+    margin: 0 auto 1.4rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(244, 114, 182, 0.25), rgba(168, 85, 247, 0.1));
+    border: 2px solid rgba(244, 114, 182, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: #f472b6;
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.25);
+    transition: all 0.4s ease;
+    animation: heartbeatPulse 3s infinite ease-in-out;
+}
+
+@keyframes heartbeatPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(244, 114, 182, 0.2); }
+    50% { transform: scale(1.06); box-shadow: 0 0 32px rgba(244, 114, 182, 0.4); }
+}
+
+.gate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 18px;
+    border-radius: 50px;
+    background: rgba(244, 114, 182, 0.15);
+    border: 1px solid rgba(244, 114, 182, 0.3);
+    color: #fbcfe8;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.gate-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #f8fafc;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.5px;
+}
+
+.gate-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
+
+.gate-pin-container {
+    margin-bottom: 2rem;
+}
+
+.gate-digit-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 1.2rem;
+}
+
+.gate-digit {
+    width: 62px;
+    height: 72px;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #f8fafc;
+    background: rgba(15, 23, 42, 0.85);
+    border: 2px solid rgba(148, 163, 184, 0.3);
+    border-radius: 18px;
+    outline: none;
+    font-family: var(--font-heading);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.gate-digit:focus {
+    border-color: #f472b6;
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.25), 0 0 20px rgba(244, 114, 182, 0.3);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.gate-digit.error-shake {
+    animation: digitShake 0.45s ease;
+    border-color: #f43f5e;
+    color: #f43f5e;
+}
+
+@keyframes digitShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.gate-hint {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    margin-bottom: 0.8rem;
+    opacity: 0.9;
+}
+
+.gate-feedback {
+    min-height: 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f43f5e;
+    transition: color 0.3s ease;
+}
+
+.btn-gate-unlock {
+    width: 100%;
+    padding: 16px 28px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: #ffffff;
+    background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(236, 72, 153, 0.45);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-gate-unlock:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.6);
+}
+
+/* 3. FLOATING ROMANTIC AUDIO CONTROLLER PILL */
+.floating-music-pill {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid rgba(244, 114, 182, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 10px 18px 10px 12px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 114, 182, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.floating-music-pill:hover {
+    border-color: rgba(244, 114, 182, 0.7);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 28px rgba(244, 114, 182, 0.35);
+    transform: translateY(-3px);
+}
+
+.vinyl-disc {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1f2937 30%, #111827 60%, #000 100%);
+    border: 2px solid rgba(244, 114, 182, 0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.vinyl-disc.spinning {
+    animation: spinVinyl 5s linear infinite;
+}
+
+@keyframes spinVinyl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vinyl-center {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #f472b6;
+    border: 2px solid #ffffff;
+}
+
+.pill-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    max-width: 160px;
+}
+
+.pill-status {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #f472b6;
+    text-transform: uppercase;
+}
+
+.pill-track-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #f8fafc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pill-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pill-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f8fafc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.pill-btn:hover {
+    background: #f472b6;
+    color: #ffffff;
+    border-color: #f472b6;
+    transform: scale(1.12);
+}
+
+/* 4. HEARTBEAT AMBIENT GLOW ON POLAROID */
+.polaroid-card {
+    position: relative;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 30px rgba(244, 114, 182, 0.25) !important;
+    animation: polaroidBreathe 6s infinite ease-in-out alternate;
+}
+
+@keyframes polaroidBreathe {
+    0% { box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 114, 182, 0.15); }
+    100% { box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5), 0 0 38px rgba(244, 114, 182, 0.35); }
+}
+
+/* 5. FLOATING SKY LANTERN ANIMATION */
+.sky-lantern {
+    position: fixed;
+    bottom: -60px;
+    z-index: 99998;
+    pointer-events: none;
+    user-select: none;
+    font-size: 2.8rem;
+    filter: drop-shadow(0 0 18px #f59e0b) drop-shadow(0 0 35px #fbbf24);
+    animation: lanternAscend 9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes lanternAscend {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.6) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(-80px) scale(1) rotate(3deg);
+    }
+    50% {
+        opacity: 0.95;
+        transform: translateY(-50vh) translateX(30px) scale(1.05) rotate(-4deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-115vh) translateX(-20px) scale(0.7) rotate(6deg);
+    }
+}
+
+/* Mobile responsiveness for Floating Audio Pill & Entrance Gate */
+@media(max-width: 768px) {
+    .floating-music-pill {
+        bottom: 85px;
+        right: 50%;
+        transform: translateX(50%);
+        width: calc(100% - 40px);
+        max-width: 340px;
+        justify-content: space-between;
+    }
+    .gate-digit {
+        width: 52px;
+        height: 64px;
+        font-size: 2rem;
+    }
+    .entrance-gate-card {
+        padding: 2.5rem 1.4rem;
+    }
+}

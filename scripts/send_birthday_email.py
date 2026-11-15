@@ -77,8 +77,8 @@ Anonymous
     <p>Semoga di umur barumu ini, langkahmu selalu menemukan kedamaian dan hatimu tak lagi memikul lelah sendirian. Jaga dirimu baik-baik ya, Rayya.</p>
     
     <p style="margin-top: 24px;">
-      Dari seseorang yang pernah ada di ceritamu,<br>
-      <strong>Anonymous 🌒</strong>
+      Dari:<br>
+      <strong>Anonymous</strong>
     </p>
 
     <div class="footer">

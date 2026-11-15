@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Night for Rayya ("Houris") 🌒</title>
+    <title>A Romantic Night for Rayya ("Houris") 🌒✨</title>
 
     <!-- Google Fonts Integration -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,10 +11,45 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=2.5">
+    <link rel="stylesheet" href="style.css?v=2.6">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+
+    <!-- INTERACTIVE ROMANTIC STARRY SKY CANVAS -->
+    <canvas id="starry-canvas"></canvas>
+
+    <!-- ==========================================
+       0. ENTRANCE GATE SCREEN (PIN: 1708 - 17 AGUSTUS)
+    ========================================== -->
+    <div id="entrance-gate">
+        <div class="entrance-gate-card">
+            <div class="gate-lock-icon-circle" id="gate-icon-circle">
+                <i class="fas fa-lock" id="gate-lock-icon"></i>
+            </div>
+            <span class="gate-badge"><i class="fas fa-key"></i> GERBANG RAHASIA</span>
+            <h1 class="gate-title">Ruang yang Terkunci di Bawah Langit</h1>
+            <p class="gate-subtitle">Hanya seseorang dengan tanggal kelahiran istimewa ini yang dapat membuka apa yang tersimpan di baliknya.</p>
+
+            <div class="gate-pin-container">
+                <div class="gate-digit-inputs" id="gate-digit-inputs">
+                    <input type="password" class="gate-digit" maxlength="1" inputmode="numeric" autocomplete="off" autofocus data-index="0">
+                    <input type="password" class="gate-digit" maxlength="1" inputmode="numeric" autocomplete="off" data-index="1">
+                    <input type="password" class="gate-digit" maxlength="1" inputmode="numeric" autocomplete="off" data-index="2">
+                    <input type="password" class="gate-digit" maxlength="1" inputmode="numeric" autocomplete="off" data-index="3">
+                </div>
+                <div class="gate-hint">
+                    <i class="fas fa-sparkles"></i> Petunjuk: Hari kelahiranmu (Format: <strong>DDMM</strong>)
+                </div>
+                <div class="gate-feedback" id="gate-feedback"></div>
+            </div>
+
+            <button class="btn-gate-unlock" id="btn-gate-unlock" onclick="submitGatePin()">
+                <i class="fas fa-heart"></i> Buka Gerbang Rahasia
+            </button>
+        </div>
+    </div>
+
 
     <!-- AMBIENT FLOATING NOCTURNAL DECORATIONS -->
     <div class="ambient-decorations" aria-hidden="true">
@@ -179,8 +214,13 @@
             <div class="diary-container">
                 <div class="diary-date" id="live-date">Today</div>
                 <textarea class="diary-paper" id="journal-editor" placeholder="Di balik dinginnya malam ini, ada hal yang ingin kutitipkan pada waktu..."></textarea>
-                <button class="btn-prime" style="margin-top: 15px;" onclick="commitJournalEntry()">Simpan ke Dalam Hening 🌒</button>
-                <button class="btn-sec" style="margin-top: 15px;" onclick="viewJournalEntry()">Lihat Harapan Tersimpan</button>
+                
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px;">
+                    <button class="btn-prime" onclick="commitJournalEntry()"><i class="fas fa-feather"></i> Simpan ke Dalam Hening 🌒</button>
+                    <button class="btn-sec" onclick="releaseSkyLantern()"><i class="fas fa-fire"></i> Tembakkan Lentera Harapan 🏮</button>
+                    <button class="btn-sec" onclick="viewJournalEntry()"><i class="fas fa-book-open"></i> Buka Catatan</button>
+                </div>
+
             </div>
         </div>
     </section>
@@ -229,9 +269,32 @@
             <h2>Melodi di Ujung Hening 🎶</h2>
             <p>Nyalakan alunan suara ini untuk menemani kesunyianmu... Suara hujan di luar jendela, deburan ombak yang jauh, dan denting piano malam yang dingin namun menenangkan.</p>
             <div class="music-grid">
+                <div class="track-card" onclick="controlAudioTracks(this, 'Piano')">
+                    <i class="fas fa-music"></i>
+                    <span>Romantic Piano</span>
+                    <small style="font-size: 0.78rem; opacity: 0.8; display: block; margin-top: 4px;">Denting Penuh Rindu</small>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
+                </div>
                 <div class="track-card" onclick="controlAudioTracks(this, 'Rain')">
                     <i class="fas fa-cloud-showers-heavy"></i>
-                    <span>Rain</span>
+                    <span>Midnight Rain</span>
+                    <small style="font-size: 0.78rem; opacity: 0.8; display: block; margin-top: 4px;">Hujan di Larut Malam</small>
+                    <div class="equalizer-wave">
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                        <span class="equalizer-bar"></span>
+                    </div>
+                </div>
+                <div class="track-card" onclick="controlAudioTracks(this, 'Forest')">
+                    <i class="fas fa-moon"></i>
+                    <span>Night Serenade</span>
+                    <small style="font-size: 0.78rem; opacity: 0.8; display: block; margin-top: 4px;">Angin & Melodi Sunyi</small>
                     <div class="equalizer-wave">
                         <span class="equalizer-bar"></span>
                         <span class="equalizer-bar"></span>
@@ -241,27 +304,8 @@
                 </div>
                 <div class="track-card" onclick="controlAudioTracks(this, 'Ocean')">
                     <i class="fas fa-water"></i>
-                    <span>Ocean</span>
-                    <div class="equalizer-wave">
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                    </div>
-                </div>
-                <div class="track-card" onclick="controlAudioTracks(this, 'Forest')">
-                    <i class="fas fa-tree"></i>
-                    <span>Forest</span>
-                    <div class="equalizer-wave">
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                        <span class="equalizer-bar"></span>
-                    </div>
-                </div>
-                <div class="track-card" onclick="controlAudioTracks(this, 'Piano')">
-                    <i class="fas fa-music"></i>
-                    <span>Piano</span>
+                    <span>Deep Ocean</span>
+                    <small style="font-size: 0.78rem; opacity: 0.8; display: block; margin-top: 4px;">Deburan Ombak Hangat</small>
                     <div class="equalizer-wave">
                         <span class="equalizer-bar"></span>
                         <span class="equalizer-bar"></span>
@@ -296,7 +340,7 @@
 
         <div class="dev-name">Untuk: Rayya Childora W. ("Houris")</div>
         <div class="dev-major">Dari:</div>
-        <div class="dev-univ">Anonymous (Seseorang yang diam-diam masih mengingat semua yang pernah terlewati)</div>
+        <div class="dev-univ">Anonymous</div>
 
         <div class="final-greeting">
             <p>Selamat bertambah usia di bawah langit yang sama.</p>
@@ -307,6 +351,26 @@
     <!-- ==========================================
        ENGINE LOGIC CORE (VANILLA JAVASCRIPT ES6)
     ========================================== -->
-    <script src="script.js?v=2.5"></script>
+    <script src="script.js?v=2.6"></script>
+
+    <!-- FLOATING ROMANTIC MUSIC CONTROLLER WIDGET -->
+    <div id="floating-music-pill" class="floating-music-pill" onclick="toggleFloatingMusicDropdown(event)">
+        <div class="vinyl-disc" id="vinyl-disc">
+            <div class="vinyl-center"></div>
+        </div>
+        <div class="pill-info">
+            <span class="pill-status" id="pill-status">ROMANTIC AMBIENCE</span>
+            <span class="pill-track-name" id="pill-track-name">Romantic Piano</span>
+        </div>
+        <div class="pill-controls">
+            <button class="pill-btn" id="pill-play-btn" onclick="togglePlayGlobalAudio(event)" title="Play / Pause">
+                <i class="fas fa-play" id="pill-play-icon"></i>
+            </button>
+            <button class="pill-btn" onclick="playNextRomanticTrack(event)" title="Lagu Berikutnya">
+                <i class="fas fa-forward-step"></i>
+            </button>
+        </div>
+    </div>
+
 </body>
 </html>
