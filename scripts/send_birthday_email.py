@@ -19,28 +19,28 @@ def send_email(recipient_email=None, custom_subject=None):
         print("ERROR: Alamat email penerima (RAYYA_EMAIL) belum diisi!")
         sys.exit(1)
 
-    subject = custom_subject or "🎂 Ada Kejutan Kecil di Hari Ulang Tahunmu, Rayya... Coba Buka Ini!"
+    subject = custom_subject or "🌒 Sepucuk Pesan di Tengah Sunyinya Malam Ulang Tahunmu, Rayya..."
     
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"] = f"Muhammad Yahya DH. <{sender_email}>"
+    msg["From"] = f"Anonymous <{sender_email}>"
     msg["To"] = recipient_email
 
-    text_content = """Hai Houris... ✨
+    text_content = """Hai Houris... 🌒
 
-Selamat ulang tahun ya!
+Selamat bertambah usia di bawah langit yang sama.
 
-Khusus di hari spesialmu ini, aku sengaja buatin satu website kecil sederhana buat nemenin hari ulang tahunmu. Di dalamnya ada kumpulan doa, musik penenang suasana, dan sedikit pesan kecil buat kamu.
+Malam ini terasa begitu sunyi, dan entah kenapa membawaku kembali mengingat hal-hal yang pernah kita lewati bersama. Obrolan larut malam kita dulu, tawa kecilmu, dan bagaimana caramu pernah membuat hari-hariku yang biasa terasa begitu berarti. Ada rasa kangen yang terselip, tapi kubiarkan mengalir tenang tanpa membebanimu.
 
-Coba buka di sini ya:
+Kutinggalkan sepetak ruang kecil di sini untuk menemani malam ulang tahunmu:
 👉 https://dhiyaahaq33.github.io/birthday-rayya/
 
-(Psst... ada pintu rahasia berikon rumah di kanan atas dengan PIN: 130806 yang menunggu untuk kamu buka!)
+(Ada pintu sunyi di pojok kanan atas berikon rumah dengan PIN: 130806 jika kamu ingin melihat apa yang masih tersimpan di baliknya.)
 
-Semoga kamu suka ya sama kejutan kecil ini. Sekali lagi selamat bertambah usia, Rayya. Semoga harimu menyenangkan! 🎂✨
+Semoga di umur barumu ini, langkahmu selalu menemukan kedamaian, dan hatimu tak lagi memikul lelah sendirian. Jaga dirimu baik-baik ya, Rayya.
 
 Dari:
-Muhammad Yahya DH.
+Anonymous
 """
 
     html_content = """<!DOCTYPE html>
@@ -60,25 +60,25 @@ Muhammad Yahya DH.
 </head>
 <body>
   <div class="card">
-    <div class="badge">✨ Special Birthday Surprise</div>
-    <h1>Happy Birthday, Rayya! 🎂</h1>
-    <p>Hai <strong>Houris</strong>... ✨</p>
-    <p>Selamat bertambah usia ya!</p>
-    <p>Khusus di hari spesialmu ini, aku sengaja buatin satu website kecil sederhana buat nemenin hari ulang tahunmu. Di dalamnya ada kumpulan doa, musik penenang suasana, dan sedikit cerita kecil buat kamu.</p>
+    <div class="badge">🌒 Memories & Nostalgia</div>
+    <h1>Malam Ini Milikmu, Rayya... 🌒</h1>
+    <p>Hai <strong>Houris</strong>...</p>
+    <p>Selamat bertambah usia di bawah langit yang sama.</p>
+    <p>Malam ini terasa begitu sunyi, dan entah kenapa membawaku kembali mengingat hal-hal yang pernah kita lewati bersama. Obrolan larut malam kita dulu, tawa kecilmu, dan kehangatan yang dulu pernah kita bagi. Ada rasa kangen yang terselip, tapi kubiarkan mengalir tenang tanpa membebanimu.</p>
     
     <div style="text-align: center;">
-      <a href="https://dhiyaahaq33.github.io/birthday-rayya/" class="btn">✨ Buka Kejutan Ulang Tahunmu</a>
+      <a href="https://dhiyaahaq33.github.io/birthday-rayya/" class="btn">🌒 Masuk ke Ruang Sunyi</a>
     </div>
 
     <div class="pin-box">
-      <strong>🔑 Kode Rahasia:</strong> Di website ada pintu rahasia berikon rumah di kanan atas dengan PIN: <code style="background:#FFF; padding:2px 6px; border-radius:4px; font-size:15px; font-weight:bold; color:#FF8FAB;">130806</code>
+      <strong>🔑 Kode Rahasia:</strong> Di website ada pintu sunyi berikon rumah di kanan atas dengan PIN: <code style="background:#FFF; padding:2px 6px; border-radius:4px; font-size:15px; font-weight:bold; color:#FF8FAB;">130806</code>
     </div>
 
-    <p>Semoga kamu suka ya sama kejutan kecil ini. Sekali lagi selamat bertambah usia, Rayya. Semoga harimu selalu dipenuhi senyuman!</p>
+    <p>Semoga di umur barumu ini, langkahmu selalu menemukan kedamaian dan hatimu tak lagi memikul lelah sendirian. Jaga dirimu baik-baik ya, Rayya.</p>
     
     <p style="margin-top: 24px;">
-      Dari yang selalu mengagumi & mendoakanmu,<br>
-      <strong>Muhammad Yahya DH. ✨</strong>
+      Dari seseorang yang pernah ada di ceritamu,<br>
+      <strong>Anonymous 🌒</strong>
     </p>
 
     <div class="footer">

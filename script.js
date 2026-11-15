@@ -2,47 +2,47 @@
         let streamActiveInstance = null;
         let activeFacingMode = "user";
 
-        // Kumpulan doa baik & apresiasi tulus untuk Rayya
+                // Kumpulan bisikan doa malam & kenangan masa lalu untuk Rayya
         const affirmationBank = [
-            "Selamat ulang tahun, Rayya. Semoga umur baru ini membawakan banyak sekali alasan buat kamu tersenyum.",
-            "Semoga di usiamu yang baru ini, setiap langkahmu dipenuhi ketenangan dan kemudahan.",
-            "Terima kasih ya sudah hadir dan jadi sosok yang selalu bikin hari-hari terasa lebih berwarna.",
-            "Semoga semua mimpi dan cita-cita yang kamu simpan bisa terwujud satu per satu.",
-            "Sehat selalu ya, Rayya. Senyum manismu itu selalu punya energi positif buat orang di sekitarmu.",
-            "Kamu pantas mendapatkan banyak hal baik dan bahagia di dunia ini.",
-            "Terima kasih sudah bertahan dan tumbuh jadi sosok yang sekeren dan sehebat sekarang.",
-            "Semoga hari-harimu ke depan selalu terasa lebih ringan dan menyenangkan.",
-            "Selamat bertambah usia, Rayya. Tetap jadi pribadi yang hangat dan apa adanya ya.",
-            "Semoga Tuhan melancarkan segala urusan dan memudahkan setiap rencana baikmu.",
-            "Kamu itu istimewa dengan caramu sendiri, jangan pernah ragu sama kemampuanmu ya.",
-            "Semoga hatimu selalu dipenuhi rasa damai dan dikelilingi orang-orang yang tulus.",
-            "Selamat ulang tahun! Semoga tawa manismu itu nggak pernah pudar ya, Rayya.",
-            "Senang dan bersyukur banget bisa kenal dan dekat sama kamu sejauh ini.",
-            "Semoga tahun ini membawakanmu kejutan-kejutan menyenangkan yang bikin kamu bahagia.",
-            "Terima kasih sudah selalu jadi teman ngobrol dan sosok yang menyenangkan buatku.",
-            "Selamat menikmati hari spesialmu, Rayya. Hari ini harimu, rayakan dengan bahagia!",
-            "Keberadaanmu selalu punya arti tersendiri. Terima kasih sudah ada di sekitarku.",
-            "Semoga kebaikan yang selalu kamu berikan ke orang lain kembali padamu berlipat ganda.",
-            "Di hari lahirmu ini, doaku semoga bahagiamu selalu bertambah di setiap harinya.",
-            "Kebaikan dan ketulusan hatimu itu hal yang paling bikin kagum dari dirimu.",
-            "Kalau lagi capek atau butuh teman cerita, ingat ya kalau aku selalu ada buat dengerin kamu.",
-            "Selamat ulang tahun, Rayya. Semoga kamu selalu dikelilingi kehangatan.",
-            "Semoga rasa percaya dirimu makin tumbuh dan masa depanmu makin bersinar terang.",
-            "Semoga umur baru ini membawa banyak pengalaman seru dan cerita baru yang berkesan.",
-            "Kamu adalah salah satu orang terbaik yang pernah kutemui, Rayya.",
-            "Tetap jadi dirimu sendiri ya, karena Rayya yang seperti inilah yang selalu bikin nyaman.",
-            "Selamat bertambah usia! Semoga kita bisa terus berbagi banyak cerita seru ke depan.",
-            "Semoga hal-hal yang dulu bikin kamu sedih berganti jadi tawa bahagia di umur barumu.",
-            "Wishing you the happiest birthday, Rayya Childora W.! Sukses dan bahagia selalu ya. ✨"
+            "Selamat ulang tahun, Rayya. Malam ini sunyi, tapi semoga hatimu menemukan kedamaian yang selalu kucari untukmu.",
+            "Kadang aku masih teringat obrolan larut malam kita dulu... hal-hal sederhana yang kini hanya jadi kenangan manis di ujung ingatan.",
+            "Selamat bertambah usia, Houris. Meski waktu telah membawa kita ke jalan berbeda, rasa kangen pada tawamu tak pernah benar-benar hilang.",
+            "Semoga kamu tidak pernah merasa sendirian, bahkan saat malam terasa begitu dingin dan sepi.",
+            "Ada rindu yang kusimpan rapi di balik keheningan... terima kasih pernah hadir dan membuat duniaku sempat terasa begitu bermakna.",
+            "Tatap langit malam ini, Rayya. Di antara bintang-bintang yang dingin, ada doa tulus yang diam-diam kupanjatkan untukmu.",
+            "Waktu mungkin telah mengubah banyak hal di antara kita, tapi caramu tersenyum masih tersimpan abadi di sudut ingatanku.",
+            "Semoga luka-luka yang tak pernah kamu ceritakan ke siapa pun perlahan sembuh di umur barumu ini.",
+            "Di hari kelahiranmu ini, aku hanya ingin kamu tahu: semua jejak yang pernah kita lalui bersama adalah cerita yang tak pernah kusesali.",
+            "Selamat ulang tahun, Houris. Sosokmu yang dulu begitu dekat, kini tetap menjadi nama yang selalu kusebut dalam setiap hening.",
+            "Biar malam menelan bisingnya dunia... semoga tidurmu nyenyak dan mimpi-mimpimu malam ini membawa pelukan hangat.",
+            "Terima kasih sudah bertahan melewati hari-hari yang berat. Kamu jauh lebih kuat dari apa yang sering kamu bayangkan.",
+            "Mungkin kita tak lagi berbagi cerita seperti dulu, tapi doaku agar langkahmu selalu dimudahkan tak pernah berkurang sedikit pun.",
+            "Kadang ada lagu yang tiba-tiba berputar, lalu membawaku kembali ke masa-masa di mana kita masih sering tertawa bersama.",
+            "Selamat bertambah usia, Rayya. Jangan biarkan dinginnya dunia ini meredupkan kebaikan yang ada di dalam hatimu.",
+            "Kamu berharga, lebih dari apa yang sempat kuucapkan langsung saat kita masih sering bertatap mata.",
+            "Semoga di umur baru ini, semesta mempertemukanmu dengan orang-orang yang tulus menjagamu tanpa pernah membuatmu ragu.",
+            "Rasa kangen ini bukan untuk menahanmu kembali, tapi sekadar caraku menghargai setiap detik yang pernah kita lewati.",
+            "Di balik gelapnya malam ulang tahunmu, aku berharap kamu menemukan setitik cahaya yang menuntunmu pada kebahagiaan sejati.",
+            "Selamat ulang tahun, Rayya. Semoga senyum manismu yang dulu selalu kurindukan itu tetap mekar di wajahmu.",
+            "Setiap detik yang telah berlalu mengajarkanku bahwa hal-hal indah tak harus bertahan selamanya untuk bisa dikenang seumur hidup.",
+            "Kalau suatu saat malam terasa terlalu berat dan sepi, ingatlah bahwa pernah ada seseorang yang mengagumi keberadaanmu sedalam ini.",
+            "Semoga langkahmu ke depan selalu diringi ketenangan, dan semoga hatimu tak lagi memikul beban yang terlalu berat.",
+            "Selamat bertambah usia, Houris. Nama itu masih milikmu di dalam ingatanku, tak pernah berganti.",
+            "Mungkin ada banyak hal yang tak sempat terucap di antara kita, tapi malam ini kubiarkan doa-doa ini mengalir tanpa suara.",
+            "Terima kasih untuk setiap tawa, obrolan singkat, dan tatapan yang pernah membuat hari-hariku terasa lebih hidup.",
+            "Semoga umur baru ini membawamu pada takdir-takdir baik yang pantas kamu dapatkan setelah semua perjuanganmu.",
+            "Waktu boleh terus memudar, tapi kenangan tentang seseorang sehebat dirimu akan selalu punya tempat tersendiri.",
+            "Selamat ulang tahun, Rayya Childora W. Semoga bahagiamu tak lagi bersyarat di tahun ini.",
+            "Dari kejauhan dan dalam sunyi yang pekat... selamat bertambah usia, Rayya. Tetaplah bersinar di dalam gelapmu. 🌒"
         ];
 
-        const mirrorOverlaysBank = [
-            "Tatap dirimu... kamu selalu istimewa, Rayya.",
-            "Senyummu itu selalu bikin hari jadi lebih baik.",
-            "You are truly amazing, jangan pernah lupa itu.",
-            "Terima kasih sudah jadi sosok yang menyenangkan.",
-            "Hari ini harimu, jangan lupa tersenyum manis ya.",
-            "Bangga banget bisa kenal orang sekeren kamu."
+                const mirrorOverlaysBank = [
+            "Tatap dirimu... sosok yang tawanya pernah begitu kurindukan.",
+            "Di balik dinginnya malam, kamu masih seseorang yang istimewa, Houris.",
+            "Jangan biarkan dunia mengubah ketulusan yang pernah kukenal darimu.",
+            "Bahkan dari kejauhan, senyummu masih terasa menenangkan.",
+            "Malam ini milikmu, Rayya... berbahagialah.",
+            "Kenangan tentang apa yang kita lewati masih tersimpan rapi di sini."
         ];
 
         /* --- STAGE 1: NARRATIVE SCREEN RUNNER --- */
@@ -196,33 +196,32 @@ function processMoodSelection(emojiSymbol, labelString) {
     localStorage.setItem('birthday_stored_mood', labelString);
 
     switch (labelString) {
-
         case 'Happy':
-            messageOutput.innerText = "Senang banget lihat kamu bahagia di hari ulang tahunmu! Semoga senyum manis itu terus ada dan menemanimu sepanjang tahun ini ya, Houris. ✨";
+            messageOutput.innerText = "Melihatmu tersenyum di hari ini adalah kelegaan tersendiri bagiku. Semoga tawamu malam ini bertahan lama, seperti tawa yang dulu pernah kuhapal, Houris. 🌒";
             break;
 
         case 'Content':
-            messageOutput.innerText = "Merasa damai dan cukup di hari ulang tahunmu itu berharga banget. Semoga rasa tenang ini terus nemenin setiap langkahmu ke depan, Rayya.";
+            messageOutput.innerText = "Kedamaian di tengah sunyinya malam adalah hadiah terbaik. Semoga rasa tenang ini terus menjagamu di setiap langkah sunyi ke depan, Rayya.";
             break;
 
         case 'Calm':
-            messageOutput.innerText = "Ketenangan di hari ulang tahunmu adalah kado tersendiri. Nikmati momen hari spesialmu ini pelan-pelan ya, Rayya.";
+            messageOutput.innerText = "Di antara dinginnya waktu, ketenanganmu selalu kurindukan. Nikmati malam spesialmu perlahan dalam hening ya, Rayya.";
             break;
 
         case 'Neutral':
-            messageOutput.innerText = "Nggak apa-apa kalau hari ini terasa biasa aja. Yang penting kamu sehat, bertambah usia, dan tetap jadi sosok Houris yang selalu mempesona dengan caramu sendiri.";
+            messageOutput.innerText = "Tak apa jika malam ini terasa hampa atau biasa saja. Kamu sudah melewati banyak hal hingga sampai di titik ini, dan kamu tetap sosok yang berarti bagiku.";
             break;
 
         case 'Sad':
-            messageOutput.innerText = "Kalau hari ini terasa agak berat, nggak apa-apa ya. Istirahat dulu. Kalau butuh teman ngobrol atau cerita, aku selalu siap dengerin kok.";
+            messageOutput.innerText = "Jika malam ini terasa berat dan ada rindu yang menyesak, pejamkan matamu sejenak. Meski aku tak lagi di sampingmu, doaku masih setia menjagamu dari jauh.";
             break;
 
         case 'Overwhelmed':
-            messageOutput.innerText = "Tarik napas pelan-pelan ya... Kamu sudah berjuang hebat banget sampai di titik ini. Jangan terlalu keras sama dirimu sendiri, nikmati harimu ya.";
+            messageOutput.innerText = "Tarik napas perlahan di tengah gelap... Kamu sudah berjuang teramat jauh melewati badai. Istirahatlah, malam ini biarkan semesta yang merawat lelahmu.";
             break;
 
         default:
-            messageOutput.innerText = "Terima kasih sudah meluangkan waktu di hari spesialmu ini ya, Rayya. Semoga harimu menyenangkan! ✨";
+            messageOutput.innerText = "Terima kasih masih singgah sejenak di ruang sunyi ini. Semoga malam ini membawakanmu ketenangan, Rayya. 🌒";
     }
 }
 
@@ -231,7 +230,7 @@ function processMoodSelection(emojiSymbol, labelString) {
             const currentContent = document.getElementById('journal-editor').value;
             localStorage.setItem('birthday_stored_journal', currentContent);
             fireConfetti("hearts");
-            alert("Harapan dan ceritamu sudah tersimpan rapi di sini ya, Houris. ✨");
+            alert("Harapan dan sepenggal ceritamu telah tersimpan di dalam ruang sunyi ini... — Anonymous 🌒");
         }
 
         function viewJournalEntry() {
@@ -444,11 +443,11 @@ function fireConfetti(preset) {
             fire(0.25, {
                 spread: 26,
                 startVelocity: 55,
-                colors: ['#ff8fab', '#ffd6e7', '#cdb4db', '#ffbe0b']
+                colors: ['#f472b6', '#cbd5e1', '#94a3b8', '#e2e8f0', '#fb7185']
             });
             fire(0.2, {
                 spread: 60,
-                colors: ['#ff8fab', '#ffffff', '#cdb4db']
+                colors: ['#f472b6', '#e2e8f0', '#64748b', '#38bdf8']
             });
             fire(0.35, {
                 spread: 100,
@@ -508,7 +507,7 @@ function blowCandleWish(containerElement) {
         flame.classList.remove('blown');
         smoke.classList.remove('active');
         banner.style.display = 'none';
-        instruction.innerHTML = '🕯️ <strong>Tiup Lilin & Make a Wish:</strong> Klik lilin di atas untuk meniupnya ya! ✨';
+        instruction.innerHTML = '🕯️ <strong>Nyalakan Lilin di Tengah Gelap:</strong> Klik lilin di atas untuk meniup nyala apinya ke dalam hening malam... 🌒';
         return;
     }
 
@@ -530,7 +529,7 @@ function blowCandleWish(containerElement) {
         banner.style.display = 'block';
     }
     if (instruction) {
-        instruction.innerHTML = '✨ <strong>Lilin Ditiup!</strong> Harapanmu sudah meluncur ke langit... Klik lagi jika ingin menyalakannya kembali 🎂';
+        instruction.innerHTML = '🌒 <strong>Api Telah Padam:</strong> Doamu telah terbawa angin malam... Kenangan tak pernah benar-benar padam. Klik lagi jika ingin menyalakannya kembali 🕯️';
     }
 }
 
