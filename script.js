@@ -52,14 +52,24 @@
             restoreSystemStoredData();
             runStatisticsCounter();
 
-            // Check if gate is already unlocked in this session
+            const gate = document.getElementById('entrance-gate');
+            const opening = document.getElementById('opening-screen');
+
             if (sessionStorage.getItem('main_gate_unlocked') === '1708') {
-                const gate = document.getElementById('entrance-gate');
                 if (gate) {
                     gate.style.display = 'none';
                     gate.classList.add('unlocked');
                 }
-                executeNarrativeSequence();
+                if (opening) {
+                    opening.style.display = 'none'; // already completed before
+                }
+            } else {
+                if (gate) {
+                    gate.style.display = 'flex';
+                }
+                if (opening) {
+                    opening.style.display = 'none';
+                }
             }
         });
 
@@ -790,6 +800,10 @@ function submitGatePin() {
                 gateScreen.classList.add('unlocked');
                 setTimeout(() => {
                     gateScreen.style.display = 'none';
+                    const openingScreen = document.getElementById('opening-screen');
+                    if (openingScreen) {
+                        openingScreen.style.display = 'flex';
+                    }
                     executeNarrativeSequence();
                 }, 800);
             }

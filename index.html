@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>A Romantic Night for Rayya ("Houris") 🌒✨</title>
 
     <!-- Google Fonts Integration -->
@@ -11,8 +14,172 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=2.6">
+    <link rel="stylesheet" href="style.css?v=3.0">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        /* CRITICAL INLINE STYLES - ZERO CACHE DEPENDENCY */
+        html[data-theme="dark"] {
+            background-color: #0b0f19;
+            color: #f8fafc;
+        }
+
+        #starry-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #entrance-gate {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 38%, #1e1b4b 0%, #0b0f19 90%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999999 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #entrance-gate.unlocked {
+            opacity: 0;
+            transform: scale(1.08);
+            pointer-events: none;
+        }
+
+        .entrance-gate-card {
+            position: relative;
+            max-width: 480px;
+            width: 100%;
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(244, 114, 182, 0.4);
+            border-radius: 32px;
+            padding: 3rem 2.2rem;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(244, 114, 182, 0.2);
+            box-sizing: border-box;
+            z-index: 1000000;
+        }
+
+        .gate-lock-icon-circle {
+            width: 80px; height: 80px;
+            margin: 0 auto 1.4rem;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(244, 114, 182, 0.3), rgba(168, 85, 247, 0.15));
+            border: 2px solid rgba(244, 114, 182, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #f472b6;
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.3);
+        }
+
+        .gate-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 18px;
+            border-radius: 50px;
+            background: rgba(244, 114, 182, 0.15);
+            border: 1px solid rgba(244, 114, 182, 0.35);
+            color: #fbcfe8;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .gate-title {
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .gate-subtitle {
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .gate-digit-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 1.2rem;
+        }
+
+        .gate-digit {
+            width: 62px;
+            height: 72px;
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #f8fafc;
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(148, 163, 184, 0.35);
+            border-radius: 18px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.25s ease;
+        }
+
+        .gate-digit:focus {
+            border-color: #f472b6;
+            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.3), 0 0 20px rgba(244, 114, 182, 0.35);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .gate-hint {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+        }
+
+        .gate-feedback {
+            min-height: 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f43f5e;
+            margin-bottom: 1rem;
+        }
+
+        .btn-gate-unlock {
+            width: 100%;
+            padding: 16px 28px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(236, 72, 153, 0.45);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .btn-gate-unlock:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.6);
+        }
+
+        /* Opening screen hidden initially until gate is unlocked */
+        #opening-screen {
+            display: none;
+            z-index: 99998;
+        }
+    </style>
 </head>
 <body>
 
@@ -351,13 +518,27 @@
     <!-- ==========================================
        ENGINE LOGIC CORE (VANILLA JAVASCRIPT ES6)
     ========================================== -->
-    <script src="script.js?v=2.6"></script>
-
-    <!-- FLOATING ROMANTIC MUSIC CONTROLLER WIDGET -->
+        <!-- FLOATING ROMANTIC MUSIC CONTROLLER WIDGET -->
     <div id="floating-music-pill" class="floating-music-pill" onclick="toggleFloatingMusicDropdown(event)">
         <div class="vinyl-disc" id="vinyl-disc">
             <div class="vinyl-center"></div>
         </div>
+        <div class="pill-info">
+            <span class="pill-status" id="pill-status">ROMANTIC AMBIENCE</span>
+            <span class="pill-track-name" id="pill-track-name">Romantic Piano</span>
+        </div>
+        <div class="pill-controls">
+            <button class="pill-btn" id="pill-play-btn" onclick="togglePlayGlobalAudio(event)" title="Play / Pause">
+                <i class="fas fa-play" id="pill-play-icon"></i>
+            </button>
+            <button class="pill-btn" onclick="playNextRomanticTrack(event)" title="Lagu Berikutnya">
+                <i class="fas fa-forward-step"></i>
+            </button>
+        </div>
+    </div>
+    <script src="script.js?v=3.0"></script>
+
+    
         <div class="pill-info">
             <span class="pill-status" id="pill-status">ROMANTIC AMBIENCE</span>
             <span class="pill-track-name" id="pill-track-name">Romantic Piano</span>
